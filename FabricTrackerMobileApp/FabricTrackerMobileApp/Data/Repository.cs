@@ -12,6 +12,48 @@ namespace FabricTrackerMobileApp.Data
     {
         private SQLiteAsyncConnection _connection;
 
+        public event EventHandler<Fabric> OnItemAdded;
+        public event EventHandler<Fabric> OnItemUpdated;
+        public event EventHandler<Fabric> OnItemDeleted;
+        public async Task<List<Fabric>> GetFabrics()
+        {
+            await CreateConnection();
+            return await _connection.Table<Fabric>().ToListAsync();
+        }
+
+        public async Task AddFabric(Fabric fabric)
+        {
+            await CreateConnection();
+            await _connection.InsertAsync(fabric);
+            OnItemAdded?.Invoke(this, fabric);
+        }
+
+        public async Task UpdateFabric(Fabric fabric)
+        {
+            await CreateConnection();
+            await _connection.UpdateAsync(fabric);
+            OnItemUpdated?.Invoke(this, fabric);
+        }
+
+        public async Task AddOrUpdate(Fabric fabric)
+        {
+            if(fabric.Id == 0)
+            {
+                await AddFabric(fabric);
+            }
+            else
+            {
+                await UpdateFabric(fabric);
+            }
+        }
+
+        public async Task DeleteFabric(Fabric fabric)
+        {
+            await CreateConnection();
+            await _connection.DeleteAsync(fabric);
+            OnItemDeleted?.Invoke(this, fabric);
+        }
+
         private async Task CreateConnection()
         {
             if (_connection != null)
@@ -28,8 +70,8 @@ namespace FabricTrackerMobileApp.Data
             await _connection.CreateTableAsync<MainCategory>();
             await _connection.CreateTableAsync<SubCategory>();
             await _connection.CreateTableAsync<Fabric>();
-            
-            if(await _connection.Table<MainCategory>().CountAsync() == 0)
+
+            if (await _connection.Table<MainCategory>().CountAsync() == 0)
             {
                 await _connection.InsertAsync(new MainCategory()
                 {
@@ -67,40 +109,9 @@ namespace FabricTrackerMobileApp.Data
                 });
             }
         }
-        public Task<List<Fabric>> GetFabrics()
-        {
-            return null; 
-        }
 
-        public async Task AddFabric(Fabric fabric)
-        {
-            
-        }
 
-        public async Task UpdateFabric(Fabric fabric)
-        {
-            
-        }
 
-        public async Task AddOrUpdate(Fabric fabric)
-        {
-            if(fabric.Id == 0)
-            {
-                await AddFabric(fabric);
-            }
-            else
-            {
-                await UpdateFabric(fabric);
-            }
-        }
 
-        public async Task DeleteFabric(Fabric fabric)
-        {
-            
-        }
-
-        
-
-        
     }
 }
