@@ -7,7 +7,7 @@
 
     <ScrollView>
         <StackLayout VerticalOptions="StartAndExpand">
-            <Frame BackgroundColor="#2A0944" Padding="24" CornerRadius="0" Margin="0,20,0,0">
+            <Frame BackgroundColor="#2A0944" Padding="24" CornerRadius="0" Margin="0,20,0,0" HasShadow="False">
                 <Label Text="My Fabric Stash" HorizontalTextAlignment="Center" TextColor="White" FontFamily="CraftyGirls" FontSize="40" />
                 
             </Frame>

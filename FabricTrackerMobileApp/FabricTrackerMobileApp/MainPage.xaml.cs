@@ -18,7 +18,7 @@ namespace FabricTrackerMobileApp
 
         private void ViewFabricsButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new NavigationPage(new ViewFabricsPage()));
+            Navigation.PushAsync(new ViewFabricsPage());
         }
     }
 }

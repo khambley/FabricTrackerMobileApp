@@ -10,7 +10,11 @@ namespace FabricTrackerMobileApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new MainPage())
+            {
+                BarBackgroundColor = Color.FromHex("#2A0944"),
+                BarTextColor = Color.White
+            };
            
         }
 
