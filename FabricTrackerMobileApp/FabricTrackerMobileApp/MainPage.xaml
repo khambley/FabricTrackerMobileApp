@@ -18,7 +18,7 @@
                     HorizontalOptions="FillAndExpand" 
                     BackgroundColor="#319DA0"
                     TextColor="White"
-                    Clicked="ViewFabricsButton_Clicked"
+                    Command="{Binding NavigateToViewFabricsPage}"
                     Margin="30" />
 
         </StackLayout>

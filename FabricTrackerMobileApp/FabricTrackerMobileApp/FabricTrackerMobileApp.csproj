@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <None Remove="Fonts\CraftyGirls-Regular.ttf" />
+    <None Remove="PropertyChanged.Fody" />
+    <None Remove="Autofac" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +24,8 @@
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.4.1" />
+    <PackageReference Include="Autofac" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
