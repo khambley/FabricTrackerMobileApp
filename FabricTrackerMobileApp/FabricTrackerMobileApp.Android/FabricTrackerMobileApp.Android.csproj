@@ -16,7 +16,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
@@ -88,7 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FabricTrackerMobileApp\FabricTrackerMobileApp.csproj">
-      <Project>{D8453F59-65B3-456F-8F2C-85330E7731D3}</Project>
+      <Project>{B37940B8-C2E9-44B6-9B12-468AACCFC1CB}</Project>
       <Name>FabricTrackerMobileApp</Name>
     </ProjectReference>
   </ItemGroup>

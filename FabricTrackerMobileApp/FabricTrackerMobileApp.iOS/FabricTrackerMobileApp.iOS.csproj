@@ -27,6 +27,8 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignProvision>Automatic</CodesignProvision>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -61,6 +63,7 @@
     <MtouchArch>ARM64</MtouchArch>
     <CodesignKey>iPhone Developer</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -113,6 +116,9 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\fabricbolts.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\fabricbolts.imageset\fabricbolts.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -129,7 +135,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\FabricTrackerMobileApp\FabricTrackerMobileApp.csproj">
-      <Project>{D8453F59-65B3-456F-8F2C-85330E7731D3}</Project>
+      <Project>{B37940B8-C2E9-44B6-9B12-468AACCFC1CB}</Project>
       <Name>FabricTrackerMobileApp</Name>
     </ProjectReference>
   </ItemGroup>
