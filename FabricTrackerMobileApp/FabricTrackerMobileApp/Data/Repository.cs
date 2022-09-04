@@ -15,6 +15,11 @@ namespace FabricTrackerMobileApp.Data
         public event EventHandler<Fabric> OnItemAdded;
         public event EventHandler<Fabric> OnItemUpdated;
         public event EventHandler<Fabric> OnItemDeleted;
+
+        public event EventHandler<MainCategory> OnMainCategoryItemAdded;
+        public event EventHandler<MainCategory> OnMainCategoryItemUpdated;
+        public event EventHandler<MainCategory> OnMainCategoryItemDeleted;
+
         public async Task<List<Fabric>> GetFabrics()
         {
             await CreateConnection();
@@ -110,8 +115,43 @@ namespace FabricTrackerMobileApp.Data
             }
         }
 
+        public async Task<List<MainCategory>> GetMainCategories()
+        {
+            await CreateConnection();
+            return await _connection.Table<MainCategory>().ToListAsync();
+        }
 
+        public async Task AddMainCategory(MainCategory mainCategory)
+        {
+            await CreateConnection();
+            await _connection.InsertAsync(mainCategory);
+            OnMainCategoryItemAdded?.Invoke(this, mainCategory);
+        }
 
+        public async Task UpdateMainCategory(MainCategory mainCategory)
+        {
+            await CreateConnection();
+            await _connection.UpdateAsync(mainCategory);
+            OnMainCategoryItemUpdated?.Invoke(this, mainCategory);
+        }
 
+        public async Task AddOrUpdateMainCategory(MainCategory mainCategory)
+        {
+            if (mainCategory.MainCategoryId == 0)
+            {
+                await AddMainCategory(mainCategory);
+            }
+            else
+            {
+                await UpdateMainCategory(mainCategory);
+            }
+        }
+
+        public async Task DeleteMainCategory(MainCategory mainCategory)
+        {
+            await CreateConnection();
+            await _connection.DeleteAsync(mainCategory);
+            OnMainCategoryItemDeleted?.Invoke(this, mainCategory);
+        }
     }
 }

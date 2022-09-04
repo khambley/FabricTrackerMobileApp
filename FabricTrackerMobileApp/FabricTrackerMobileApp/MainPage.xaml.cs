@@ -19,9 +19,9 @@ namespace FabricTrackerMobileApp
             
         }
 
-        private void ViewFabricsButton_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new ViewFabricsPage());
-        }
+        //private void ViewFabricsButton_Clicked(object sender, EventArgs e)
+        //{
+        //    Navigation.PushAsync(new ViewFabricsPage());
+        //}
     }
 }

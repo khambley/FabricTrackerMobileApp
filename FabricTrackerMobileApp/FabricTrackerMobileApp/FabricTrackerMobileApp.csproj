@@ -14,6 +14,7 @@
     <None Remove="Fonts\CraftyGirls-Regular.ttf" />
     <None Remove="PropertyChanged.Fody" />
     <None Remove="Autofac" />
+    <None Remove="Pages\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,8 +33,8 @@
     <EmbeddedResource Update="Pages\AddFabricPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="ViewFabricsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\" />
   </ItemGroup>
 </Project>

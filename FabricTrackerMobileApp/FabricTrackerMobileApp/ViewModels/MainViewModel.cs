@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FabricTrackerMobileApp.Data;
+using FabricTrackerMobileApp.Pages;
 using Xamarin.Forms;
 
 namespace FabricTrackerMobileApp.ViewModels
@@ -18,9 +19,15 @@ namespace FabricTrackerMobileApp.ViewModels
             Task.Run(async () => await LoadData());
         }
 
-        public ICommand NavigateToViewFabricsPage => new Command(async () =>
+        //public ICommand NavigateToViewFabricsPage => new Command(async () =>
+        //{
+        //    await Navigation.PushAsync(new ViewFabricsPage());
+        //});
+
+        public ICommand NavigateToMainCategoriesPage => new Command(async () =>
         {
-            await Navigation.PushAsync(new ViewFabricsPage());
+            var mainCategoriesPage = Resolver.Resolve<MainCategoriesPage>();
+            await Navigation.PushAsync(mainCategoriesPage);
         });
 
         private async Task LoadData()

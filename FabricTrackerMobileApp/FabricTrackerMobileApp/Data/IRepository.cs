@@ -12,10 +12,21 @@ namespace FabricTrackerMobileApp.Data
         event EventHandler<Fabric> OnItemAdded;
         event EventHandler<Fabric> OnItemUpdated;
         event EventHandler<Fabric> OnItemDeleted;
+
+        event EventHandler<MainCategory> OnMainCategoryItemAdded;
+        event EventHandler<MainCategory> OnMainCategoryItemUpdated;
+        event EventHandler<MainCategory> OnMainCategoryItemDeleted;
+
         Task<List<Fabric>> GetFabrics();
         Task AddFabric(Fabric fabric);
         Task UpdateFabric(Fabric fabric);
         Task AddOrUpdate(Fabric fabric);
         Task DeleteFabric(Fabric fabric);
+
+        Task<List<MainCategory>> GetMainCategories();
+        Task AddMainCategory(MainCategory mainCategory);
+        Task UpdateMainCategory(MainCategory mainCategory);
+        Task AddOrUpdateMainCategory(MainCategory mainCategory);
+        Task DeleteMainCategory(MainCategory mainCategory);
     }
 }
