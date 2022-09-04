@@ -24,7 +24,10 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public MainCategoriesViewModel(Repository repository)
         {
+            repository.OnMainCategoryItemAdded += (sender, item) => MainCategoryItems.Add(CreateMainCategoryItemViewModel(item));
+            repository.OnMainCategoryItemUpdated += (sender, item) => Task.Run(async () => await LoadData());
             this.repository = repository;
+            Task.Run(async () => await LoadData());
             
         }
 
