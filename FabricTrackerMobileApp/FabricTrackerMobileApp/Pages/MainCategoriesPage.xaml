@@ -10,7 +10,9 @@
         <ToolbarItem Text="Add" Command="{Binding AddItem}" />
     </ContentPage.ToolbarItems>
 
-    <ListView ItemsSource="{Binding MainCategoryItems}">
+    <ListView x:Name="ItemsListView"
+              ItemsSource="{Binding MainCategoryItems}"
+              SelectedItem="{Binding SelectedItem}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
@@ -18,11 +20,8 @@
                     <Label Text="{Binding MainCategoryItem.MainCategoryName}"
                            FontSize="Large"
                            Padding="10" />
-
                 </ViewCell>
-
             </DataTemplate>
-
         </ListView.ItemTemplate>
 
     </ListView>

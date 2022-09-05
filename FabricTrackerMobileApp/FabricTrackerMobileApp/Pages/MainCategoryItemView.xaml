@@ -3,16 +3,54 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="FabricTrackerMobileApp.Pages.MainCategoryItemView"
-    Title="New MainCategory Item">
+    Title="Main Category">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save" Command="{Binding Save}" />
     </ContentPage.ToolbarItems>
 
     <StackLayout Padding="14">
-        <Label Text="Enter a new main category..." />
-        <Entry Text="{Binding MainCategoryItem.MainCategoryName}" />
+        <Label Text="Main Category Name:" />
+        <Entry Text="{Binding MainCategoryItem.MainCategoryName}"
+               Margin="0,0,0,10"
+               TextColor="DarkBlue"
+               PlaceholderColor="Red" />
 
+        <BoxView HorizontalOptions="FillAndExpand"
+                 HeightRequest="1"
+                 Color="#1690F4"
+                 />
+        <Grid Margin="20,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Text="SubCategories"
+                   HorizontalOptions="Start"
+                   VerticalTextAlignment="Center" />
+
+            <Button Grid.Column="1"
+                    Grid.Row="0"
+                    Text="Add SubCategory"
+                    HorizontalOptions="EndAndExpand"
+                    BackgroundColor="Blue"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    Padding="10,5,10,5" />
+        </Grid>
+        <BoxView HorizontalOptions="FillAndExpand"
+                 HeightRequest="1"
+                 Color="#1690F4"
+                 />
+        
+        <ListView />
     </StackLayout>
 </ContentPage>
 

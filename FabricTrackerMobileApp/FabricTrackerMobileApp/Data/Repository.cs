@@ -20,6 +20,10 @@ namespace FabricTrackerMobileApp.Data
         public event EventHandler<MainCategory> OnMainCategoryItemUpdated;
         public event EventHandler<MainCategory> OnMainCategoryItemDeleted;
 
+        public event EventHandler<SubCategory> OnSubCategoryItemAdded;
+        public event EventHandler<SubCategory> OnSubCategoryItemUpdated;
+        public event EventHandler<SubCategory> OnSubCategoryItemDeleted;
+
         public async Task<List<Fabric>> GetFabrics()
         {
             await CreateConnection();
@@ -121,6 +125,11 @@ namespace FabricTrackerMobileApp.Data
             return await _connection.Table<MainCategory>().ToListAsync();
         }
 
+        public async Task<List<SubCategory>> GetSubCategories(int Id)
+        {
+            await CreateConnection();
+            return await _connection.Table<SubCategory>().Where(mc => mc.MainCategoryId == Id).ToListAsync();
+        }
         public async Task AddMainCategory(MainCategory mainCategory)
         {
             await CreateConnection();

@@ -17,6 +17,10 @@ namespace FabricTrackerMobileApp.Data
         event EventHandler<MainCategory> OnMainCategoryItemUpdated;
         event EventHandler<MainCategory> OnMainCategoryItemDeleted;
 
+        event EventHandler<SubCategory> OnSubCategoryItemAdded;
+        event EventHandler<SubCategory> OnSubCategoryItemUpdated;
+        event EventHandler<SubCategory> OnSubCategoryItemDeleted;
+
         Task<List<Fabric>> GetFabrics();
         Task AddFabric(Fabric fabric);
         Task UpdateFabric(Fabric fabric);
@@ -28,5 +32,7 @@ namespace FabricTrackerMobileApp.Data
         Task UpdateMainCategory(MainCategory mainCategory);
         Task AddOrUpdateMainCategory(MainCategory mainCategory);
         Task DeleteMainCategory(MainCategory mainCategory);
+
+        Task<List<SubCategory>> GetSubCategories(int Id);
     }
 }
