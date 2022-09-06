@@ -43,7 +43,8 @@
                     BackgroundColor="Blue"
                     TextColor="White"
                     FontAttributes="Bold"
-                    Padding="10,5,10,5" />
+                    Padding="10,5,10,5"
+                    Command="{Binding AddSubCategoryItem}"/>
         </Grid>
         <BoxView HorizontalOptions="FillAndExpand"
                  HeightRequest="1"

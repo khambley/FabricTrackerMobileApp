@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Linq;
+using FabricTrackerMobileApp.Pages;
 
 namespace FabricTrackerMobileApp.ViewModels
 {
@@ -34,10 +35,13 @@ namespace FabricTrackerMobileApp.ViewModels
             await repository.AddOrUpdateMainCategory(MainCategoryItem);
             await Navigation.PopAsync();
         });
+
         public ICommand AddSubCategoryItem => new Command(async () =>
         {
-            
+            var subCategoryItemView = Resolver.Resolve<SubCategoryItemView>();
+            await Navigation.PushAsync(subCategoryItemView);
         });
+
         private async Task LoadData()
         {
             var subCategoryItems = await repository.GetSubCategories(MainCategoryItem.MainCategoryId);
