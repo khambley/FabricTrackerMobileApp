@@ -12,9 +12,18 @@ namespace FabricTrackerMobileApp
             Resolver.container = container;
         }
 
-        public static T Resolve<T>()
+        public static T Resolve<T>(string name = null, object value = null)
         {
-            return container.Resolve<T>();
+            if (name != null)
+            {
+                return container.Resolve<T>(new NamedParameter(name, value));
+            }
+            else
+            {
+                return container.Resolve<T>();
+            }
+            
+            
         }
     }
 }

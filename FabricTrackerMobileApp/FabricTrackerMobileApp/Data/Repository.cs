@@ -24,6 +24,7 @@ namespace FabricTrackerMobileApp.Data
         public event EventHandler<SubCategory> OnSubCategoryItemUpdated;
         public event EventHandler<SubCategory> OnSubCategoryItemDeleted;
 
+        #region Fabrics
         public async Task<List<Fabric>> GetFabrics()
         {
             await CreateConnection();
@@ -62,6 +63,7 @@ namespace FabricTrackerMobileApp.Data
             await _connection.DeleteAsync(fabric);
             OnItemDeleted?.Invoke(this, fabric);
         }
+        #endregion
 
         private async Task CreateConnection()
         {
@@ -119,17 +121,14 @@ namespace FabricTrackerMobileApp.Data
             }
         }
 
+        #region MainCategories
         public async Task<List<MainCategory>> GetMainCategories()
         {
             await CreateConnection();
             return await _connection.Table<MainCategory>().ToListAsync();
         }
 
-        public async Task<List<SubCategory>> GetSubCategories(int Id)
-        {
-            await CreateConnection();
-            return await _connection.Table<SubCategory>().Where(mc => mc.MainCategoryId == Id).ToListAsync();
-        }
+        
         public async Task AddMainCategory(MainCategory mainCategory)
         {
             await CreateConnection();
@@ -161,6 +160,42 @@ namespace FabricTrackerMobileApp.Data
             await CreateConnection();
             await _connection.DeleteAsync(mainCategory);
             OnMainCategoryItemDeleted?.Invoke(this, mainCategory);
+        }
+        #endregion
+
+        public async Task<List<SubCategory>> GetSubCategories(int Id)
+        {
+            await CreateConnection();
+            return await _connection.Table<SubCategory>().Where(mc => mc.MainCategoryId == Id).ToListAsync();
+        }
+        public async Task AddSubCategory(SubCategory subCategory)
+        {
+            await CreateConnection();
+            await _connection.InsertAsync(subCategory);
+            OnSubCategoryItemAdded?.Invoke(this, subCategory);
+        }
+        public async Task UpdateSubCategory(SubCategory subCategory)
+        {
+            await CreateConnection();
+            await _connection.UpdateAsync(subCategory);
+            OnSubCategoryItemUpdated?.Invoke(this, subCategory);
+        }
+        public async Task AddOrUpdateSubCategory(SubCategory subCategory)
+        {
+            if (subCategory.SubCategoryId == 0)
+            {
+                await AddSubCategory(subCategory);
+            }
+            else
+            {
+                await UpdateSubCategory(subCategory);
+            }
+        }
+        public async Task DeleteSubCategory(SubCategory subCategory)
+        {
+            await CreateConnection();
+            await _connection.DeleteAsync(subCategory);
+            OnSubCategoryItemDeleted?.Invoke(this, subCategory);
         }
     }
 }

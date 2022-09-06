@@ -34,5 +34,9 @@ namespace FabricTrackerMobileApp.Data
         Task DeleteMainCategory(MainCategory mainCategory);
 
         Task<List<SubCategory>> GetSubCategories(int Id);
+        Task AddSubCategory(SubCategory subCategory);
+        Task UpdateSubCategory(SubCategory subCategory);
+        Task AddOrUpdateSubCategory(SubCategory subCategory);
+        Task DeleteSubCategory(SubCategory subCategory);
     }
 }

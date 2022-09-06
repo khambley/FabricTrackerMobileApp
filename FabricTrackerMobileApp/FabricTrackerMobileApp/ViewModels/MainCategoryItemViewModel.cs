@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Linq;
 using FabricTrackerMobileApp.Pages;
+using Autofac;
 
 namespace FabricTrackerMobileApp.ViewModels
 {
@@ -38,7 +39,7 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public ICommand AddSubCategoryItem => new Command(async () =>
         {
-            var subCategoryItemView = Resolver.Resolve<SubCategoryItemView>();
+            var subCategoryItemView = Resolver.Resolve<SubCategoryItemView>("mainCategoryItem", MainCategoryItem );
             await Navigation.PushAsync(subCategoryItemView);
         });
 
