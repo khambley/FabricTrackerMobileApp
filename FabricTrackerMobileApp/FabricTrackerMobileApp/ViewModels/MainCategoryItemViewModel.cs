@@ -18,6 +18,8 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public MainCategory MainCategoryItem { get; set; }
 
+        public int MainCategoryId { get; set; }
+
         public ObservableCollection<SubCategoryViewModel> SubCategoryItems { get; set; }
 
         public MainCategoryItemViewModel(Repository repository)

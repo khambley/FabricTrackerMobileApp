@@ -16,6 +16,8 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public ObservableCollection<MainCategoryViewModel> MainCategoryItems { get; set; }
 
+        public ObservableCollection<SubCategoryViewModel> SubCategoryItems { get; set; }
+
         public MainCategoryViewModel SelectedItem
         {
             get { return null; }
@@ -38,7 +40,25 @@ namespace FabricTrackerMobileApp.ViewModels
 
             vm.MainCategoryItem = item.MainCategoryItem;
 
+            var subCategoryItems = await repository.GetSubCategories(item.MainCategoryItem.MainCategoryId);
+
+            if(subCategoryItems.Count > 0)
+            {
+                var subCategoryItemViewModels = subCategoryItems.Select(sc => CreateSubCategoryItemViewModel(sc));
+                vm.SubCategoryItems = new ObservableCollection<SubCategoryViewModel>(subCategoryItemViewModels);
+            }
+
             await Navigation.PushAsync(mainCategoryItemView);
+        }
+        private SubCategoryViewModel CreateSubCategoryItemViewModel(SubCategory subCategoryItem)
+        {
+            var subCategoryItemViewModel = new SubCategoryViewModel(subCategoryItem);
+            subCategoryItemViewModel.SubCategoryItemStatusChanged += SubCategoryItemStatusChanged;
+            return subCategoryItemViewModel;
+        }
+        private void SubCategoryItemStatusChanged(object sender, EventArgs e)
+        {
+
         }
         public ICommand AddItem => new Command(async () =>
         {
@@ -60,6 +80,8 @@ namespace FabricTrackerMobileApp.ViewModels
             var mainCategories = await repository.GetMainCategories();
             var mainCategoriesViewModels = mainCategories.Select(mc => CreateMainCategoryItemViewModel(mc));
             MainCategoryItems = new ObservableCollection<MainCategoryViewModel>(mainCategoriesViewModels);
+
+            
         }
 
         private MainCategoryViewModel CreateMainCategoryItemViewModel(MainCategory mainCategory)

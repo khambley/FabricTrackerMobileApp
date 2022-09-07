@@ -20,7 +20,7 @@
                  HeightRequest="1"
                  Color="#1690F4"
                  />
-        <Grid Margin="20,0,0,0">
+        <Grid Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" />
                 <ColumnDefinition Width="0.5*" />
@@ -33,6 +33,7 @@
             <Label Grid.Column="0"
                    Grid.Row="0"
                    Text="SubCategories"
+                   FontSize="Large"
                    HorizontalOptions="Start"
                    VerticalTextAlignment="Center" />
 
@@ -43,7 +44,7 @@
                     BackgroundColor="Blue"
                     TextColor="White"
                     FontAttributes="Bold"
-                    Padding="10,5,10,5"
+                    Padding="10,0,10,0"
                     Command="{Binding AddSubCategoryItem}"/>
         </Grid>
         <BoxView HorizontalOptions="FillAndExpand"
@@ -51,7 +52,18 @@
                  Color="#1690F4"
                  />
         
-        <ListView />
+        <ListView ItemsSource="{Binding SubCategoryItems}">
+            <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Label Text="{Binding SubCategoryItem.SubCategoryName}"
+                           FontSize="Large"
+                           Padding="10" />
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+        </ListView>
     </StackLayout>
 </ContentPage>
 
