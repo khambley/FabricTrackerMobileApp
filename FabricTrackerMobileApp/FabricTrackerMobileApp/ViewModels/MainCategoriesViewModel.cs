@@ -52,7 +52,7 @@ namespace FabricTrackerMobileApp.ViewModels
         }
         private SubCategoryViewModel CreateSubCategoryItemViewModel(SubCategory subCategoryItem)
         {
-            var subCategoryItemViewModel = new SubCategoryViewModel(subCategoryItem);
+            var subCategoryItemViewModel = new SubCategoryViewModel(subCategoryItem, repository);
             subCategoryItemViewModel.SubCategoryItemStatusChanged += SubCategoryItemStatusChanged;
             return subCategoryItemViewModel;
         }
@@ -86,7 +86,7 @@ namespace FabricTrackerMobileApp.ViewModels
 
         private MainCategoryViewModel CreateMainCategoryItemViewModel(MainCategory mainCategory)
         {
-            var itemViewModel = new MainCategoryViewModel(mainCategory);
+            var itemViewModel = new MainCategoryViewModel(mainCategory, repository);
             itemViewModel.MainCategoryItemStatusChanged += MainCategoryItemStatusChanged;
             return itemViewModel;
         }

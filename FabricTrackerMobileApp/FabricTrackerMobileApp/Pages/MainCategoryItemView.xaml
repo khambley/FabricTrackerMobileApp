@@ -56,6 +56,12 @@
             <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Delete"
+                                  Command="{Binding DeleteSubCategory}"
+                                  IsDestructive="True" />
+                    </ViewCell.ContextActions>
+
                     <Label Text="{Binding SubCategoryItem.SubCategoryName}"
                            FontSize="Large"
                            Padding="10" />

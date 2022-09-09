@@ -28,6 +28,13 @@ namespace FabricTrackerMobileApp.ViewModels
             await repository.AddSubCategory(SubCategoryItem);
             await Navigation.PopAsync();
         });
+        public ICommand DeleteSubCategory => new Command(async () =>
+        {
+            //bool answer = await page.DisplayAlert($"Delete Subcategory", "Are you sure you want to delete {SubCategoryItem}", "OK", "Cancel");
+            await repository.DeleteSubCategory(SubCategoryItem);
+            
+
+        });
     }
 }
 

@@ -16,7 +16,11 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Delete"
+                                  Command="{Binding DeleteMainCategory}"
+                                  IsDestructive="True" />
+                    </ViewCell.ContextActions>
                     <Label Text="{Binding MainCategoryItem.MainCategoryName}"
                            FontSize="Large"
                            Padding="10" />

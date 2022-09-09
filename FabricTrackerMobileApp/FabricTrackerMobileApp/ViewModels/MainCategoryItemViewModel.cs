@@ -54,7 +54,7 @@ namespace FabricTrackerMobileApp.ViewModels
 
         private SubCategoryViewModel CreateSubCategoryItemViewModel(SubCategory subCategoryItem)
         {
-            var subCategoryItemViewModel = new SubCategoryViewModel(subCategoryItem);
+            var subCategoryItemViewModel = new SubCategoryViewModel(subCategoryItem, repository);
             subCategoryItemViewModel.SubCategoryItemStatusChanged += SubCategoryItemStatusChanged;
             return subCategoryItemViewModel;
         }

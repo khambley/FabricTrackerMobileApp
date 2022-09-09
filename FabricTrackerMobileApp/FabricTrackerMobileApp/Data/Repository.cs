@@ -159,7 +159,7 @@ namespace FabricTrackerMobileApp.Data
         {
             await CreateConnection();
             await _connection.DeleteAsync(mainCategory);
-            OnMainCategoryItemDeleted?.Invoke(this, mainCategory);
+            OnMainCategoryItemUpdated?.Invoke(this, mainCategory);
         }
         #endregion
 
@@ -195,7 +195,7 @@ namespace FabricTrackerMobileApp.Data
         {
             await CreateConnection();
             await _connection.DeleteAsync(subCategory);
-            OnSubCategoryItemDeleted?.Invoke(this, subCategory);
+            OnSubCategoryItemUpdated?.Invoke(this, subCategory);
         }
     }
 }
