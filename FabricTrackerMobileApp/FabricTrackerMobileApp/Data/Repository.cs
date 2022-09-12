@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SQLite;
 using System.IO;
+using Xamarin.Forms;
 
 namespace FabricTrackerMobileApp.Data
 {
@@ -122,6 +123,7 @@ namespace FabricTrackerMobileApp.Data
         }
 
         #region MainCategories
+        
         public async Task<List<MainCategory>> GetMainCategories()
         {
             await CreateConnection();
@@ -132,15 +134,63 @@ namespace FabricTrackerMobileApp.Data
         public async Task AddMainCategory(MainCategory mainCategory)
         {
             await CreateConnection();
-            await _connection.InsertAsync(mainCategory);
-            OnMainCategoryItemAdded?.Invoke(this, mainCategory);
+            var mainCategoriesList = await GetMainCategories();
+
+            //check if maincategory already exists
+            bool exists = false;
+            foreach (var item in mainCategoriesList)
+            {
+                if (item.MainCategoryName == mainCategory.MainCategoryName)
+                {
+                    exists = true;
+                    break;
+                }               
+            }
+            if (!exists)
+            {
+                await _connection.InsertAsync(mainCategory);
+                OnMainCategoryItemAdded?.Invoke(this, mainCategory);
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.Current.MainPage.DisplayAlert("Error", $"{mainCategory.MainCategoryName} already exists in database", "OK");
+                });
+            }
+
         }
 
         public async Task UpdateMainCategory(MainCategory mainCategory)
         {
             await CreateConnection();
-            await _connection.UpdateAsync(mainCategory);
-            OnMainCategoryItemUpdated?.Invoke(this, mainCategory);
+            var mainCategoriesList = await GetMainCategories();
+
+            //check if maincategory already exists
+            bool exists = false;
+            foreach (var item in mainCategoriesList)
+            {
+                if (item.MainCategoryName == mainCategory.MainCategoryName)
+                {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists)
+            {
+                await _connection.UpdateAsync(mainCategory);
+                OnMainCategoryItemUpdated?.Invoke(this, mainCategory);
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.Current.MainPage.DisplayAlert("Error", $"{mainCategory.MainCategoryName} already exists in database", "OK");
+                });
+            }
+            //await CreateConnection();
+            //await _connection.UpdateAsync(mainCategory);
+            //OnMainCategoryItemUpdated?.Invoke(this, mainCategory);
         }
 
         public async Task AddOrUpdateMainCategory(MainCategory mainCategory)
