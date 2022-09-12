@@ -155,7 +155,7 @@ namespace FabricTrackerMobileApp.Data
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    App.Current.MainPage.DisplayAlert("Error", $"{mainCategory.MainCategoryName} already exists in database", "OK");
+                    App.Current.MainPage.DisplayAlert("Error", $"{mainCategory.MainCategoryName} category already exists in database", "OK");
                 });
             }
 
@@ -218,17 +218,65 @@ namespace FabricTrackerMobileApp.Data
             await CreateConnection();
             return await _connection.Table<SubCategory>().Where(mc => mc.MainCategoryId == Id).ToListAsync();
         }
+
         public async Task AddSubCategory(SubCategory subCategory)
         {
             await CreateConnection();
-            await _connection.InsertAsync(subCategory);
-            OnSubCategoryItemAdded?.Invoke(this, subCategory);
+            var subCategoriesList = await GetSubCategories(subCategory.MainCategoryId);
+
+            //check if subCategory already exists
+            bool exists = false;
+            foreach (var item in subCategoriesList)
+            {
+                if (item.SubCategoryName == subCategory.SubCategoryName)
+                {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists)
+            {
+                await _connection.InsertAsync(subCategory);
+                OnSubCategoryItemAdded?.Invoke(this, subCategory);
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.Current.MainPage.DisplayAlert("Error", $"{subCategory.SubCategoryName} category already exists in database", "OK");
+                });
+            }
         }
         public async Task UpdateSubCategory(SubCategory subCategory)
         {
             await CreateConnection();
-            await _connection.UpdateAsync(subCategory);
-            OnSubCategoryItemUpdated?.Invoke(this, subCategory);
+            var subCategoriesList = await GetSubCategories(subCategory.MainCategoryId);
+
+            //check if subCategory already exists
+            bool exists = false;
+            foreach (var item in subCategoriesList)
+            {
+                if (item.SubCategoryName == subCategory.SubCategoryName)
+                {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists)
+            {
+                await _connection.UpdateAsync(subCategory);
+                OnSubCategoryItemUpdated?.Invoke(this, subCategory);
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.Current.MainPage.DisplayAlert("Error", $"{subCategory.SubCategoryName} category already exists in database", "OK");
+                });
+            }
+
+            //await _connection.UpdateAsync(subCategory);
+            //OnSubCategoryItemUpdated?.Invoke(this, subCategory);
         }
         public async Task AddOrUpdateSubCategory(SubCategory subCategory)
         {
