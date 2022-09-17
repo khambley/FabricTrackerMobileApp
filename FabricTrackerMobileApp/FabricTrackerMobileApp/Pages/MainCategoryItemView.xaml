@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FabricTrackerMobileApp.Pages.MainCategoryItemView"
+    Title="Main Category">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding Save}" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Padding="14">
+        <Label Text="Main Category Name:" />
+        <Entry Text="{Binding MainCategoryItem.MainCategoryName}"
+               Margin="0,0,0,10"
+               TextColor="DarkBlue"
+               PlaceholderColor="Red" />
+
+        <BoxView HorizontalOptions="FillAndExpand"
+                 HeightRequest="1"
+                 Color="#1690F4"
+                 />
+        <Grid Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Text="SubCategories"
+                   FontSize="Large"
+                   HorizontalOptions="Start"
+                   VerticalTextAlignment="Center" />
+
+            <Button Grid.Column="1"
+                    Grid.Row="0"
+                    Text="Add SubCategory"
+                    HorizontalOptions="EndAndExpand"
+                    BackgroundColor="Blue"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    Padding="10,0,10,0"
+                    Command="{Binding AddSubCategoryItem}"/>
+        </Grid>
+        <BoxView HorizontalOptions="FillAndExpand"
+                 HeightRequest="1"
+                 Color="#1690F4"
+                 />
+        
+        <ListView ItemsSource="{Binding SubCategoryItems}">
+            <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Delete"
+                                  Command="{Binding DeleteSubCategory}"
+                                  IsDestructive="True" />
+                    </ViewCell.ContextActions>
+
+                    <Label Text="{Binding SubCategoryItem.SubCategoryName}"
+                           FontSize="Large"
+                           Padding="10" />
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+        </ListView>
+    </StackLayout>
+</ContentPage>
+

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SQLite;
 using System.IO;
+using Xamarin.Forms;
 
 namespace FabricTrackerMobileApp.Data
 {
@@ -15,6 +16,16 @@ namespace FabricTrackerMobileApp.Data
         public event EventHandler<Fabric> OnItemAdded;
         public event EventHandler<Fabric> OnItemUpdated;
         public event EventHandler<Fabric> OnItemDeleted;
+
+        public event EventHandler<MainCategory> OnMainCategoryItemAdded;
+        public event EventHandler<MainCategory> OnMainCategoryItemUpdated;
+        public event EventHandler<MainCategory> OnMainCategoryItemDeleted;
+
+        public event EventHandler<SubCategory> OnSubCategoryItemAdded;
+        public event EventHandler<SubCategory> OnSubCategoryItemUpdated;
+        public event EventHandler<SubCategory> OnSubCategoryItemDeleted;
+
+        #region Fabrics
         public async Task<List<Fabric>> GetFabrics()
         {
             await CreateConnection();
@@ -53,6 +64,7 @@ namespace FabricTrackerMobileApp.Data
             await _connection.DeleteAsync(fabric);
             OnItemDeleted?.Invoke(this, fabric);
         }
+        #endregion
 
         private async Task CreateConnection()
         {
@@ -110,8 +122,189 @@ namespace FabricTrackerMobileApp.Data
             }
         }
 
+        #region MainCategories
+        
+        public async Task<List<MainCategory>> GetMainCategories()
+        {
+            await CreateConnection();
+            return await _connection.Table<MainCategory>().ToListAsync();
+        }
 
+        
+        public async Task AddMainCategory(MainCategory mainCategory)
+        {
+            await CreateConnection();
+            var mainCategoriesList = await GetMainCategories();
 
+            //check if maincategory already exists
+            bool exists = false;
+            foreach (var item in mainCategoriesList)
+            {
+                if (item.MainCategoryName == mainCategory.MainCategoryName)
+                {
+                    exists = true;
+                    break;
+                }               
+            }
+            if (!exists)
+            {
+                await _connection.InsertAsync(mainCategory);
+                OnMainCategoryItemAdded?.Invoke(this, mainCategory);
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.Current.MainPage.DisplayAlert("Error", $"{mainCategory.MainCategoryName} category already exists in database", "OK");
+                });
+            }
 
+        }
+
+        public async Task UpdateMainCategory(MainCategory mainCategory)
+        {
+            await CreateConnection();
+            var mainCategoriesList = await GetMainCategories();
+
+            //check if maincategory already exists
+            bool exists = false;
+            foreach (var item in mainCategoriesList)
+            {
+                if (item.MainCategoryName == mainCategory.MainCategoryName)
+                {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists)
+            {
+                await _connection.UpdateAsync(mainCategory);
+                OnMainCategoryItemUpdated?.Invoke(this, mainCategory);
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.Current.MainPage.DisplayAlert("Error", $"{mainCategory.MainCategoryName} already exists in database", "OK");
+                });
+            }
+        }
+
+        public async Task AddOrUpdateMainCategory(MainCategory mainCategory)
+        {
+            if (mainCategory.MainCategoryId == 0)
+            {
+                await AddMainCategory(mainCategory);
+            }
+            else
+            {
+                await UpdateMainCategory(mainCategory);
+            }
+        }
+
+        public async Task DeleteMainCategory(MainCategory mainCategory)
+        {
+            await CreateConnection();
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                bool answer = await App.Current.MainPage.DisplayAlert("Confirm the Deletion", $"Are you sure you want to delete the category, {mainCategory.MainCategoryName}, from the database?", "OK", "Cancel");
+                if (answer)
+                {
+                    await _connection.DeleteAsync(mainCategory);
+                    OnMainCategoryItemUpdated?.Invoke(this, mainCategory);
+                }
+            });
+        }
+        #endregion
+
+        #region SubCategories
+
+        public async Task<List<SubCategory>> GetSubCategories(int Id)
+        {
+            await CreateConnection();
+            return await _connection.Table<SubCategory>().Where(mc => mc.MainCategoryId == Id).ToListAsync();
+        }
+
+        public async Task AddSubCategory(SubCategory subCategory)
+        {
+            await CreateConnection();
+            var subCategoriesList = await GetSubCategories(subCategory.MainCategoryId);
+
+            //check if subCategory already exists
+            bool exists = false;
+            foreach (var item in subCategoriesList)
+            {
+                if (item.SubCategoryName == subCategory.SubCategoryName)
+                {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists)
+            {
+                await _connection.InsertAsync(subCategory);
+                OnSubCategoryItemAdded?.Invoke(this, subCategory);
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.Current.MainPage.DisplayAlert("Error", $"{subCategory.SubCategoryName} category already exists in database", "OK");
+                });
+            }
+        }
+        public async Task UpdateSubCategory(SubCategory subCategory)
+        {
+            await CreateConnection();
+            var subCategoriesList = await GetSubCategories(subCategory.MainCategoryId);
+
+            //check if subCategory already exists
+            bool exists = false;
+            foreach (var item in subCategoriesList)
+            {
+                if (item.SubCategoryName == subCategory.SubCategoryName)
+                {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists)
+            {
+                await _connection.UpdateAsync(subCategory);
+                OnSubCategoryItemUpdated?.Invoke(this, subCategory);
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.Current.MainPage.DisplayAlert("Error", $"{subCategory.SubCategoryName} category already exists in database", "OK");
+                });
+            }
+        }
+        public async Task AddOrUpdateSubCategory(SubCategory subCategory)
+        {
+            if (subCategory.SubCategoryId == 0)
+            {
+                await AddSubCategory(subCategory);
+            }
+            else
+            {
+                await UpdateSubCategory(subCategory);
+            }
+        }
+        public async Task DeleteSubCategory(SubCategory subCategory)
+        {
+            await CreateConnection();
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                bool answer = await App.Current.MainPage.DisplayAlert("Confirm the Deletion", $"Are you sure you want to delete the subcategory, {subCategory.SubCategoryName}, from the database?", "OK", "Cancel");
+                if (answer)
+                {
+                    await _connection.DeleteAsync(subCategory);
+                    OnSubCategoryItemUpdated?.Invoke(this, subCategory);
+                }
+            });
+        }
+        #endregion
     }
 }
