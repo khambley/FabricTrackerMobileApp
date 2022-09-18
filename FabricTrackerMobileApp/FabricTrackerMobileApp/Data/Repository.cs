@@ -140,7 +140,7 @@ namespace FabricTrackerMobileApp.Data
             bool exists = false;
             foreach (var item in mainCategoriesList)
             {
-                if (item.MainCategoryName == mainCategory.MainCategoryName)
+                if (item.MainCategoryName.ToLower() == mainCategory.MainCategoryName.ToLower())
                 {
                     exists = true;
                     break;
@@ -170,7 +170,7 @@ namespace FabricTrackerMobileApp.Data
             bool exists = false;
             foreach (var item in mainCategoriesList)
             {
-                if (item.MainCategoryName == mainCategory.MainCategoryName)
+                if (item.MainCategoryName.ToLower() == mainCategory.MainCategoryName.ToLower())
                 {
                     exists = true;
                     break;
@@ -234,7 +234,7 @@ namespace FabricTrackerMobileApp.Data
             bool exists = false;
             foreach (var item in subCategoriesList)
             {
-                if (item.SubCategoryName == subCategory.SubCategoryName)
+                if (item.SubCategoryName.ToLower() == subCategory.SubCategoryName.ToLower())
                 {
                     exists = true;
                     break;
@@ -262,7 +262,7 @@ namespace FabricTrackerMobileApp.Data
             bool exists = false;
             foreach (var item in subCategoriesList)
             {
-                if (item.SubCategoryName == subCategory.SubCategoryName)
+                if (item.SubCategoryName.ToLower() == subCategory.SubCategoryName.ToLower())
                 {
                     exists = true;
                     break;
