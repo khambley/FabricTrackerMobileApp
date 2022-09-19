@@ -11,18 +11,10 @@ namespace FabricTrackerMobileApp.ViewModels
     {
         private readonly Repository repository;
 
-        
-
         public MainViewModel(Repository repository)
         {
             this.repository = repository;
-            Task.Run(async () => await LoadData());
         }
-
-        //public ICommand NavigateToViewFabricsPage => new Command(async () =>
-        //{
-        //    await Navigation.PushAsync(new ViewFabricsPage());
-        //});
 
         public ICommand NavigateToMainCategoriesPage => new Command(async () =>
         {
@@ -30,10 +22,13 @@ namespace FabricTrackerMobileApp.ViewModels
             await Navigation.PushAsync(mainCategoriesPage);
         });
 
-        private async Task LoadData()
+        public ICommand NavigateToFabricsPage => new Command(async () =>
         {
+            var fabricsPage = Resolver.Resolve<FabricsPage>();
+            await Navigation.PushAsync(fabricsPage);
+        });
 
-        }
+     
     }
 }
 

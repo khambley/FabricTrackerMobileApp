@@ -8,7 +8,7 @@ namespace FabricTrackerMobileApp.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string ItemCode { get; set; }
+        public string ItemCode { get; set; } //Auto-generated when added
 
         public string Name { get; set; }
 
