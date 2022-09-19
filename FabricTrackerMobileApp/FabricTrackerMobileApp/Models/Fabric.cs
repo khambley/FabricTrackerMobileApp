@@ -43,6 +43,8 @@ namespace FabricTrackerMobileApp.Models
 
         public string Source { get; set; }
 
+        public string SourceUrl { get; set; }
+
         public DateTime? PurchaseDate { get; set; }
 
         public DateTime? ReleaseDate { get; set; }

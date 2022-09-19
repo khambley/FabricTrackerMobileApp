@@ -8,62 +8,222 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save" />
     </ContentPage.ToolbarItems>
+    
+    <ScrollView>
+        <StackLayout>
+            <Grid Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition Width="0.7*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <!--Row 1-->
+                    <RowDefinition Height="120" />
+                    <!--Row 2-->
+                    <RowDefinition Height="40" />
+                    <!--Row 3-->
+                    <RowDefinition Height="40" />
 
-    <Grid Margin="0,0,10,0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.3*" />
-            <ColumnDefinition Width="0.7*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-        </Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <!--Row 19-->
+                    <RowDefinition Height="40" />
+                    <!--Row 20-->
+                    <RowDefinition Height="40" />
+                    <!--Row 21-->
+                    <RowDefinition Height="80" />
+                    <!--Row 22-->
+                    <RowDefinition Height="40" />
 
-        <!--Row 1-->
-        <BoxView Grid.Column="0" Grid.Row="0" BackgroundColor="LightGray" />
-        <StackLayout Grid.Column="1" Grid.Row="0">
-            <Button Text="Choose Image" />
-            <Button Text="Capture Image" />
+                </Grid.RowDefinitions>
+
+                <!--Row 1-->
+                <BoxView Grid.Column="0" Grid.Row="0" BackgroundColor="LightGray" />
+                <StackLayout Grid.Column="1" Grid.Row="0">
+                    <Button Text="Choose Image" />
+                    <Button Text="Capture Image" />
+                </StackLayout>
+
+                <!--Row 2-->
+                <Label Grid.Column="0" Grid.Row="1" Padding="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Small" Text="MainCategory" />
+                <Picker Grid.Column="1" Grid.Row="1" Margin="0,0,10,0" />
+
+                <!--Row 3-->
+                <Label Grid.Column="0" Grid.Row="2" Padding="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Small" Text="SubCategory" />
+                <Picker Grid.Column="1" Grid.Row="2" Margin="0,0,10,0" />
+
+                <!--Row 4-->
+                <Label Grid.Column="0" Grid.Row="3" Padding="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Small" Text="Name" />
+                <Entry Grid.Column="1" Grid.Row="3" Margin="0,0,10,0" />
+
+                <!--Row 5-->
+                <Label Grid.Column="0" Grid.Row="4" Padding="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Small" Text="Remaining Qty (in inches)*" />
+                <Entry Grid.Column="1" Grid.Row="4" Placeholder="Enter Total Inches Remaining..." Margin="0,0,10,0" />
+
+                <!--Row 6-->
+                <Label Grid.Column="0" Grid.Row="5" Padding="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Small" Text="Fat Quarter Qty" />
+                <Entry Grid.Column="1" Grid.Row="5" Margin="0,0,10,0" />
+
+                <!--Row 7-->
+                <Label Grid.Column="0" Grid.Row="6" Text="Width" Padding="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Small" />
+                <Picker Grid.Column="1" Grid.Row="6" Margin="0,0,10,0" />
+
+                <!--Row 8-->
+                <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       BackgroundColor="#2A0944"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       Margin="0,0,0,0"
+                       Text="Details" />
+
+                <!--Row 9-->
+                <Label Grid.Column="0" Grid.Row="8" Padding="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Small" Text="Background Color" />
+                <Entry Grid.Column="1" Grid.Row="8" Margin="0,0,10,0" />
+
+                <!--Row 10-->
+                <Label Grid.Column="0" Grid.Row="9" Padding="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Small" Text="Accent Color 1" />
+                <Entry Grid.Column="1" Grid.Row="9" Margin="0,0,10,0" />
+
+                <!--Row 11-->
+                <Label Grid.Column="0" Grid.Row="10" Padding="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Small" Text="Accent Color 2" />
+                <Entry Grid.Column="1" Grid.Row="10" Margin="0,0,10,0" />
+
+                <!--Row 12-->
+                <Label Grid.Column="0" Grid.Row="11"
+                       Padding="10,0,0,0"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="End"
+                       FontSize="Small"
+                       Text="Accent Color 3" />
+
+                <Entry Grid.Column="1" Grid.Row="11"
+                       Margin="0,0,10,0" />
+
+                <!--Row 13-->
+                <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="12"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       BackgroundColor="#2A0944"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       Margin="0,0,0,0"
+                       Text="Source Information" />
+
+                <!--Row 14-->
+                <Label Grid.Column="0" Grid.Row="13"
+                       Padding="10,0,0,0"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="End"
+                       FontSize="Small"
+                       Text="Source" />
+
+                <Entry Grid.Column="1" Grid.Row="13"
+                       Margin="0,0,10,0" />
+
+                <!--Row 15-->
+                <Label Grid.Column="0" Grid.Row="14"
+                       Padding="10,0,0,0"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="End"
+                       FontSize="Small"
+                       Text="Source Url" />
+
+                <Entry Grid.Column="1" Grid.Row="14"
+                       Margin="0,0,10,0" />
+
+                <!--Row 16-->
+                <Label Grid.Column="0" Grid.Row="15"
+                       Padding="10,0,0,0"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="End"
+                       FontSize="Small"
+                       Text="Original Purchase Date" />
+
+                <DatePicker Grid.Column="1" Grid.Row="15"
+                       Margin="0,0,10,0" />
+
+                <!--Row 17-->
+                <Label Grid.Column="0" Grid.Row="16"
+                       Padding="10,0,0,0"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="End"
+                       FontSize="Small"
+                       Text="Brand" />
+
+                <Entry Grid.Column="1" Grid.Row="16"
+                       Margin="0,0,10,0" />
+
+                <!--Row 18-->
+                <Label Grid.Column="0" Grid.Row="17"
+                       Padding="10,0,0,0"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="End"
+                       FontSize="Small"
+                       Text="Designer" />
+
+                <Entry Grid.Column="1" Grid.Row="17"
+                       Margin="0,0,10,0" />
+
+                <!--Row 19-->
+                <Label Grid.Column="0" Grid.Row="18"
+                       Padding="10,0,0,0"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center"
+                       FontSize="Small"
+                       Text="Discontinued?" />
+
+                <Switch Grid.Column="1" Grid.Row="18" HorizontalOptions="Start"
+                       Margin="0,0,10,0" />
+
+                <!--Row 20-->
+                <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="19"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       BackgroundColor="#2A0944"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       Margin="0,0,0,0"
+                       Text="Misc." />
+
+                <!--Row 21-->
+                <Label Grid.Column="0" Grid.Row="20"
+                       Padding="10,0,0,0"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="End"
+                       FontSize="Small"
+                       Text="Notes" />
+                <StackLayout Grid.Column="1" Grid.Row="20" BackgroundColor="LightGray" Padding="1" Margin="0,0,10,0">
+                <Editor Grid.Column="1" Grid.Row="20"
+                        BackgroundColor="White" HeightRequest="77" />
+                </StackLayout>
+
+                <!--Row 22-->
+                <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="21"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       BackgroundColor="#2A0944"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       FontSize="Small"
+                       Margin="0,0,0,0"
+                       Text="End of Form - Tap 'Save' on top to save changes" />
+            </Grid>
         </StackLayout>
-
-        <!--Row 2-->
-        <Label Grid.Column="0" Grid.Row="1" Padding="10,0,0,0" VerticalTextAlignment="Center" FontSize="Small" Text="MainCategory" />
-        <Picker Grid.Column="1" Grid.Row="1" />
-
-        <!--Row 3-->
-        <Label Grid.Column="0" Grid.Row="2" Padding="10,0,0,0" VerticalTextAlignment="Center" FontSize="Small" Text="SubCategory" />
-        <Picker Grid.Column="1" Grid.Row="2" />
-
-        <!--Row 4-->
-        <Label Grid.Column="0" Grid.Row="3" Padding="10,0,0,0" VerticalTextAlignment="Center" FontSize="Small" Text="Name" />
-        <Entry Grid.Column="1" Grid.Row="3" />
-
-        <!--Row 5-->
-        <Label Grid.Column="0" Grid.Row="4" Padding="10,0,0,0" VerticalTextAlignment="Center" FontSize="Small" Text="Remaining Qty (in inches)" />
-        <Entry Grid.Column="1" Grid.Row="4" Placeholder="Enter Total Inches Remaining..." />
-
-        <!--Row 6-->
-        <Label Grid.Column="0" Grid.Row="5" Padding="10,0,0,0" VerticalTextAlignment="Center" FontSize="Small" Text="Fat Qtr Qty" />
-        <Entry Grid.Column="1" Grid.Row="5" />
-
-        <!--Row 7-->
-        <Label Grid.Column="0" Grid.Row="6" Text="Width" />
-        <Picker Grid.Column="1" Grid.Row="6" />
-
-        <!--Row 8-->
-        <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Text="Details" />
-
-        <!--Row 9-->
-        <Label Grid.Column="0" Grid.Row="8" Text="Bkg Color" />
-        <Entry Grid.Column="1" Grid.Row="8" />
-
-    </Grid>
+    </ScrollView>
 </ContentPage>
 
