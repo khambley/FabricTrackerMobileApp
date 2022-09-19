@@ -6,7 +6,7 @@
     Title="Fabrics List">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" />
+        <ToolbarItem Text="Add" Command="{Binding AddItem}"  />
     </ContentPage.ToolbarItems>
 
     <Grid>

@@ -4,6 +4,66 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="FabricTrackerMobileApp.Pages.FabricItemView"
     Title="Fabric Item">
-    
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" />
+    </ContentPage.ToolbarItems>
+
+    <Grid Margin="0,0,10,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*" />
+            <ColumnDefinition Width="0.7*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+
+        <!--Row 1-->
+        <BoxView Grid.Column="0" Grid.Row="0" BackgroundColor="LightGray" />
+        <StackLayout Grid.Column="1" Grid.Row="0">
+            <Button Text="Choose Image" />
+            <Button Text="Capture Image" />
+        </StackLayout>
+
+        <!--Row 2-->
+        <Label Grid.Column="0" Grid.Row="1" Padding="10,0,0,0" VerticalTextAlignment="Center" FontSize="Small" Text="MainCategory" />
+        <Picker Grid.Column="1" Grid.Row="1" />
+
+        <!--Row 3-->
+        <Label Grid.Column="0" Grid.Row="2" Padding="10,0,0,0" VerticalTextAlignment="Center" FontSize="Small" Text="SubCategory" />
+        <Picker Grid.Column="1" Grid.Row="2" />
+
+        <!--Row 4-->
+        <Label Grid.Column="0" Grid.Row="3" Padding="10,0,0,0" VerticalTextAlignment="Center" FontSize="Small" Text="Name" />
+        <Entry Grid.Column="1" Grid.Row="3" />
+
+        <!--Row 5-->
+        <Label Grid.Column="0" Grid.Row="4" Padding="10,0,0,0" VerticalTextAlignment="Center" FontSize="Small" Text="Remaining Qty (in inches)" />
+        <Entry Grid.Column="1" Grid.Row="4" Placeholder="Enter Total Inches Remaining..." />
+
+        <!--Row 6-->
+        <Label Grid.Column="0" Grid.Row="5" Padding="10,0,0,0" VerticalTextAlignment="Center" FontSize="Small" Text="Fat Qtr Qty" />
+        <Entry Grid.Column="1" Grid.Row="5" />
+
+        <!--Row 7-->
+        <Label Grid.Column="0" Grid.Row="6" Text="Width" />
+        <Picker Grid.Column="1" Grid.Row="6" />
+
+        <!--Row 8-->
+        <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Text="Details" />
+
+        <!--Row 9-->
+        <Label Grid.Column="0" Grid.Row="8" Text="Bkg Color" />
+        <Entry Grid.Column="1" Grid.Row="8" />
+
+    </Grid>
 </ContentPage>
 
