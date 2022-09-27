@@ -17,10 +17,12 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public List<MainCategory> MainCategoriesList { get; set; }
 
+        public List<SubCategory> SubCategoriesList { get; set; }
+
         public FabricItemViewModel(Repository repository)
         {
             this.repository = repository;
-            MainCategoriesList = GetCategoriesList();
+            MainCategoriesList = GetMainCategoriesList();
             FabricItem = new Fabric();
         }
 
@@ -30,14 +32,28 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public ICommand Save => new Command(async () =>
         {
+            FabricItem.MainCategoryId = SelectedMainCategory.MainCategoryId;
+            FabricItem.SubCategoryId = SelectedSubCategory.SubCategoryId;
             await repository.AddOrUpdate(FabricItem);
             await Navigation.PopAsync();
         });
 
-        private List<MainCategory> GetCategoriesList()
+        private List<MainCategory> GetMainCategoriesList()
         {
             var items = Task.Run(async () => await repository.GetMainCategories());
             return items.Result;
+        }
+
+        private List<SubCategory> GetSubCategoriesList(int mainCategoryId)
+        {
+            var items = Task.Run(async () => await repository.GetSubCategories(mainCategoryId));
+            return items.Result;
+        }
+
+        public void OnMainCategoryChosen(object sender, EventArgs args)
+        {
+            var mainCategoryId = SelectedMainCategory.MainCategoryId;
+            SubCategoriesList = GetSubCategoriesList(mainCategoryId);
         }
     }
 }

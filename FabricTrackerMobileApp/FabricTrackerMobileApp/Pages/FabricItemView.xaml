@@ -6,7 +6,7 @@
     Title="Fabric Item">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" />
+        <ToolbarItem Text="Save" Command="{Binding Save}" />
     </ContentPage.ToolbarItems>
     
     <ScrollView>
@@ -70,7 +70,9 @@
                         ItemsSource="{Binding MainCategoriesList}"
                         ItemDisplayBinding="{Binding MainCategoryName}"
                         Title="--Select MainCategory--"
-                        SelectedItem="SelectedMainCategory" />
+                        SelectedItem="{Binding SelectedMainCategory, Mode=TwoWay }"
+                        SelectedIndexChanged="mcPicker_SelectedIndexChanged"
+                        />
 
                 <!--Row 3-->
                 <Label Grid.Column="0" Grid.Row="2"
@@ -80,7 +82,12 @@
                        FontSize="Small"
                        Text="SubCategory" />
                 <Picker Grid.Column="1" Grid.Row="2"
-                        Margin="0,0,10,0" />
+                        Margin="0,0,10,0"
+                        ItemsSource="{Binding SubCategoriesList}"
+                        ItemDisplayBinding="{Binding SubCategoryName}"
+                        Title="--Select SubCategory--"
+                        SelectedItem="{Binding SelectedSubCategory}" />
+                        
 
                 <!--Row 4-->
                 <Label Grid.Column="0" Grid.Row="3" Padding="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Small" Text="Name" />

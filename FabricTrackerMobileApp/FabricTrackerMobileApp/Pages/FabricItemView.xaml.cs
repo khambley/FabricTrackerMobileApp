@@ -13,6 +13,11 @@ namespace FabricTrackerMobileApp.Pages
             viewModel.Navigation = Navigation;
             BindingContext = viewModel;
         }
+
+        void mcPicker_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            (BindingContext as FabricItemViewModel).OnMainCategoryChosen(sender, e);
+        }
     }
 }
 
