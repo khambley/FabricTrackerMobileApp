@@ -127,10 +127,9 @@ namespace FabricTrackerMobileApp.Data
         public async Task<List<MainCategory>> GetMainCategories()
         {
             await CreateConnection();
-            return await _connection.Table<MainCategory>().ToListAsync();
+            var list = await _connection.Table<MainCategory>().ToListAsync();
+            return list;
         }
-
-        
         public async Task AddMainCategory(MainCategory mainCategory)
         {
             await CreateConnection();

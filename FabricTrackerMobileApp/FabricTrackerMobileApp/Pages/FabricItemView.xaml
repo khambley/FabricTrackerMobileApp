@@ -58,12 +58,29 @@
                 </StackLayout>
 
                 <!--Row 2-->
-                <Label Grid.Column="0" Grid.Row="1" Padding="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Small" Text="MainCategory" />
-                <Picker Grid.Column="1" Grid.Row="1" Margin="0,0,10,0" />
+                <Label Grid.Column="0" Grid.Row="1"
+                       Padding="10,0,0,0"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="End"
+                       FontSize="Small"
+                       Text="MainCategory" />
+
+                <Picker Grid.Column="1" Grid.Row="1"
+                        Margin="0,0,10,0"
+                        ItemsSource="{Binding MainCategoriesList}"
+                        ItemDisplayBinding="{Binding MainCategoryName}"
+                        Title="--Select MainCategory--"
+                        SelectedItem="SelectedMainCategory" />
 
                 <!--Row 3-->
-                <Label Grid.Column="0" Grid.Row="2" Padding="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Small" Text="SubCategory" />
-                <Picker Grid.Column="1" Grid.Row="2" Margin="0,0,10,0" />
+                <Label Grid.Column="0" Grid.Row="2"
+                       Padding="10,0,0,0"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="End"
+                       FontSize="Small"
+                       Text="SubCategory" />
+                <Picker Grid.Column="1" Grid.Row="2"
+                        Margin="0,0,10,0" />
 
                 <!--Row 4-->
                 <Label Grid.Column="0" Grid.Row="3" Padding="10,0,0,0" VerticalTextAlignment="Center" HorizontalTextAlignment="End" FontSize="Small" Text="Name" />
