@@ -152,4 +152,7 @@
       <Name>FabricTrackerMobileApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\FontAwesome-Solid-900.otf" />
+  </ItemGroup>
 </Project>

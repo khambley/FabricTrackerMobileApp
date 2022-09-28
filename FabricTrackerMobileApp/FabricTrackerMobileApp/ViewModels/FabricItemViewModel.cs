@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using FabricTrackerMobileApp.Data;
 using FabricTrackerMobileApp.Models;
+using FabricTrackerMobileApp.Pages;
 using Xamarin.Forms;
 
 namespace FabricTrackerMobileApp.ViewModels
@@ -38,7 +39,18 @@ namespace FabricTrackerMobileApp.ViewModels
             await Navigation.PopAsync();
         });
 
-        private List<MainCategory> GetMainCategoriesList()
+        public ICommand AddMainCategoryCommand => new Command(async () =>
+        {
+            var mainCategoriesPage = Resolver.Resolve<MainCategoriesPage>();
+            await Navigation.PushAsync(mainCategoriesPage);
+        });
+
+        public ICommand AddSubCategoryCommand => new Command(async () =>
+        {
+            var subCategoryItemView = Resolver.Resolve<SubCategoryItemView>("mainCategoryItem", SelectedMainCategory);
+            await Navigation.PushAsync(subCategoryItemView);
+        });
+        public List<MainCategory> GetMainCategoriesList()
         {
             var items = Task.Run(async () => await repository.GetMainCategories());
             return items.Result;
@@ -52,8 +64,12 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public void OnMainCategoryChosen(object sender, EventArgs args)
         {
-            var mainCategoryId = SelectedMainCategory.MainCategoryId;
-            SubCategoriesList = GetSubCategoriesList(mainCategoryId);
+            if (SelectedMainCategory != null)
+            {
+                var mainCategoryId = SelectedMainCategory.MainCategoryId;
+                SubCategoriesList = GetSubCategoriesList(mainCategoryId);
+            }
+            
         }
     }
 }

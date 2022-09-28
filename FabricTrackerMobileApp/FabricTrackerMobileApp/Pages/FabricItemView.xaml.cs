@@ -18,6 +18,14 @@ namespace FabricTrackerMobileApp.Pages
         {
             (BindingContext as FabricItemViewModel).OnMainCategoryChosen(sender, e);
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            (BindingContext as FabricItemViewModel).MainCategoriesList = (BindingContext as FabricItemViewModel).GetMainCategoriesList();
+            mcPicker.SelectedItem = null;
+
+        }
     }
 }
 

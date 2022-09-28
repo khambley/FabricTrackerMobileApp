@@ -34,6 +34,10 @@
 	<string>FabricTrackerMobileApp</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>FontAwesome-Solid-900.otf</string>
+	</array>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
