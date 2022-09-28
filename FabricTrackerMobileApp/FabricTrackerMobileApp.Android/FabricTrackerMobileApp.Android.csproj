@@ -101,5 +101,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\fabricbolts.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\FontAwesome-Solid-900.otf" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
