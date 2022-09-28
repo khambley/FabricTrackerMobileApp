@@ -18,14 +18,16 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <!--Row 1-->
-                    <RowDefinition Height="120" />
+                    <RowDefinition Height="100" />
                     <!--Row 2-->
                     <RowDefinition Height="40" />
                     <!--Row 3-->
+                    <RowDefinition Height="25" />
+                    <!--Row 4-->
                     <RowDefinition Height="40" />
+                    <!--Row 5-->
+                    <RowDefinition Height="25" />
 
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
@@ -50,14 +52,14 @@
 
                 </Grid.RowDefinitions>
 
-                <!--Row 1-->
+                <!--Row 1 Image Capture-->
                 <BoxView Grid.Column="0" Grid.Row="0" BackgroundColor="LightGray" />
                 <StackLayout Grid.Column="1" Grid.Row="0">
                     <Button Text="Choose Image" />
                     <Button Text="Capture Image" />
                 </StackLayout>
 
-                <!--Row 2-->
+                <!--Row 2 MainCategory Picker-->
                 <Label Grid.Column="0" Grid.Row="1"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
@@ -75,17 +77,17 @@
                         SelectedIndexChanged="mcPicker_SelectedIndexChanged"
                         />
                 
-                <!--Row 3-->   
+                <!--Row 3 Add MainCategory Button-->   
                 <Label Grid.Column="1" Grid.Row="2">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="&#x2b;" FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Blue">
+                            <Span Text="&#x2b;" FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Blue" FontSize="Small">
                                 <Span.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding AddMainCategoryCommand}" />
                                 </Span.GestureRecognizers>
                             </Span>
 
-                            <Span Text=" Add New MainCategory" TextColor="Blue">
+                            <Span Text=" Add New MainCategory" TextColor="Blue" FontSize="Small">
                                 <Span.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding AddMainCategoryCommand}" />
                                 </Span.GestureRecognizers>
@@ -94,35 +96,34 @@
                     </Label.FormattedText>
                 </Label>
                     
-                   
-                
-                
-                <!--Row 4-->
+                <!--Row 4 SubCategories Picker-->
                 <Label Grid.Column="0" Grid.Row="3"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="SubCategory" />
+
                 <Picker Grid.Column="1" Grid.Row="3"
                         Margin="0,0,10,0"
                         ItemsSource="{Binding SubCategoriesList}"
                         ItemDisplayBinding="{Binding SubCategoryName}"
+                        x:Name="scPicker"
                         Title="--Select SubCategory--"
                         SelectedItem="{Binding SelectedSubCategory}" />
                         
 
-                <!--Row 4-->
+                <!--Row 5 Add New SubCategory Button-->
                 <Label Grid.Column="1" Grid.Row="4">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="&#x2b;" FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Blue">
+                            <Span Text="&#x2b;" FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Blue" FontSize="Small">
                                 <Span.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding AddMainCategoryCommand}" />
+                                    <TapGestureRecognizer Command="{Binding AddSubCategoryCommand}" />
                                 </Span.GestureRecognizers>
                             </Span>
 
-                            <Span Text=" Add New SubCategory" TextColor="Blue">
+                            <Span Text=" Add New SubCategory" TextColor="Blue" FontSize="Small">
                                 <Span.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding AddSubCategoryCommand}" />
                                 </Span.GestureRecognizers>

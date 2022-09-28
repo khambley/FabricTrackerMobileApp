@@ -16,9 +16,9 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public Fabric FabricItem { get; set; }
 
-        public List<MainCategory> MainCategoriesList { get; set; }
+        public ObservableCollection<MainCategory> MainCategoriesList { get; set; }
 
-        public List<SubCategory> SubCategoriesList { get; set; }
+        public ObservableCollection<SubCategory> SubCategoriesList { get; set; }
 
         public FabricItemViewModel(Repository repository)
         {
@@ -50,16 +50,16 @@ namespace FabricTrackerMobileApp.ViewModels
             var subCategoryItemView = Resolver.Resolve<SubCategoryItemView>("mainCategoryItem", SelectedMainCategory);
             await Navigation.PushAsync(subCategoryItemView);
         });
-        public List<MainCategory> GetMainCategoriesList()
+        public ObservableCollection<MainCategory> GetMainCategoriesList()
         {
             var items = Task.Run(async () => await repository.GetMainCategories());
-            return items.Result;
+            return new ObservableCollection<MainCategory>(items.Result);
         }
 
-        private List<SubCategory> GetSubCategoriesList(int mainCategoryId)
+        public ObservableCollection<SubCategory> GetSubCategoriesList(int mainCategoryId = 0)
         {
             var items = Task.Run(async () => await repository.GetSubCategories(mainCategoryId));
-            return items.Result;
+            return new ObservableCollection<SubCategory>(items.Result);
         }
 
         public void OnMainCategoryChosen(object sender, EventArgs args)

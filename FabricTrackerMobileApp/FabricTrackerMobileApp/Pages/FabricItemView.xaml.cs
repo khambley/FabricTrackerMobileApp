@@ -24,7 +24,8 @@ namespace FabricTrackerMobileApp.Pages
             base.OnAppearing();
             (BindingContext as FabricItemViewModel).MainCategoriesList = (BindingContext as FabricItemViewModel).GetMainCategoriesList();
             mcPicker.SelectedItem = null;
-
+            (BindingContext as FabricItemViewModel).SubCategoriesList = (BindingContext as FabricItemViewModel).GetSubCategoriesList();
+            scPicker.SelectedItem = null;
         }
     }
 }

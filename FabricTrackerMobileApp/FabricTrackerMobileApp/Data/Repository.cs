@@ -14,7 +14,7 @@ namespace FabricTrackerMobileApp.Data
         private SQLiteAsyncConnection _connection;
 
         public event EventHandler<Fabric> OnItemAdded;
-        public event EventHandler<Fabric> OnItemUpdated;
+        public event EventHandler<Fabric> OnItemUpdated; 
         public event EventHandler<Fabric> OnItemDeleted;
 
         public event EventHandler<MainCategory> OnMainCategoryItemAdded;
@@ -87,7 +87,7 @@ namespace FabricTrackerMobileApp.Data
             {
                 await _connection.InsertAsync(new MainCategory()
                 {
-                    MainCategoryName = "General"
+                    MainCategoryName = "Uncategorized"
                 });
             }
 
@@ -95,7 +95,7 @@ namespace FabricTrackerMobileApp.Data
             {
                 await _connection.InsertAsync(new SubCategory()
                 {
-                    SubCategoryName = "Misc",
+                    SubCategoryName = "Uncategorized",
                     MainCategoryId = 1
                 });
             }
