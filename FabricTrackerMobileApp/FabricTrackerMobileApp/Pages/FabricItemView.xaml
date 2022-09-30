@@ -46,9 +46,14 @@
                     <!--Row 20-->
                     <RowDefinition Height="40" />
                     <!--Row 21-->
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="40" />
                     <!--Row 22-->
                     <RowDefinition Height="40" />
+                     <!--Row 23-->
+                    <RowDefinition Height="80" />
+                    <!--Row 24-->
+                    <RowDefinition Height="50" />
+
 
                 </Grid.RowDefinitions>
 
@@ -251,19 +256,19 @@
                        Margin="0,0,0,0"
                        Text="Source Information" />
 
-                <!--Row 16 Source-->
+                <!--Row 16 Source Name-->
                 <Label Grid.Column="0" Grid.Row="15"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small"
-                       Text="Source" />
+                       Text="Source Name" />
 
                 <Entry Grid.Column="1" Grid.Row="15"
                        Margin="0,0,10,0"
-                       />
+                       Text="{Binding FabricItem.SourceName}" />
 
-                <!--Row 15-->
+                <!--Row 17 Source Url-->
                 <Label Grid.Column="0" Grid.Row="16"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
@@ -272,9 +277,10 @@
                        Text="Source Url" />
 
                 <Entry Grid.Column="1" Grid.Row="16"
-                       Margin="0,0,10,0" />
+                       Margin="0,0,10,0"
+                       Text="{Binding FabricItem.SourceUrl}" />
 
-                <!--Row 16-->
+                <!--Row 18 Purchase Date-->
                 <Label Grid.Column="0" Grid.Row="17"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
@@ -283,9 +289,10 @@
                        Text="Original Purchase Date" />
 
                 <DatePicker Grid.Column="1" Grid.Row="17"
-                       Margin="0,0,10,0" />
+                       Margin="0,0,10,0"
+                       Date="{Binding FabricItem.PurchaseDate}" />
 
-                <!--Row 17-->
+                <!--Row 19 Brand-->
                 <Label Grid.Column="0" Grid.Row="18"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
@@ -294,9 +301,10 @@
                        Text="Brand" />
 
                 <Entry Grid.Column="1" Grid.Row="18"
-                       Margin="0,0,10,0" />
+                       Margin="0,0,10,0"
+                       Text="{Binding FabricItem.Brand}"/>
 
-                <!--Row 18-->
+                <!--Row 20 Designer-->
                 <Label Grid.Column="0" Grid.Row="19"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
@@ -305,9 +313,10 @@
                        Text="Designer" />
 
                 <Entry Grid.Column="1" Grid.Row="19"
-                       Margin="0,0,10,0" />
+                       Margin="0,0,10,0"
+                       Text="{Binding FabricItem.Designer}" />
 
-                <!--Row 19-->
+                <!--Row 21 Is Discontinued-->
                 <Label Grid.Column="0" Grid.Row="20"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
@@ -316,9 +325,10 @@
                        Text="Discontinued?" />
 
                 <Switch Grid.Column="1" Grid.Row="20" HorizontalOptions="Start"
-                       Margin="0,0,10,0" />
+                       Margin="0,0,10,0"
+                       IsToggled="{Binding FabricItem.IsDiscontinued}" />
 
-                <!--Row 20-->
+                <!--Row 22 Misc Heading-->
                 <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="21"
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"
@@ -328,20 +338,28 @@
                        Margin="0,0,0,0"
                        Text="Misc." />
 
-                <!--Row 21-->
+                <!--Row 23 Notes-->
                 <Label Grid.Column="0" Grid.Row="22"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="Notes" />
-                <StackLayout Grid.Column="1" Grid.Row="22" BackgroundColor="LightGray" Padding="1" Margin="0,0,10,0">
-                <Editor Grid.Column="1" Grid.Row="20"
-                        BackgroundColor="White" HeightRequest="77" />
+
+                <StackLayout Grid.Column="1" Grid.Row="22"
+                             BackgroundColor="LightGray"
+                             Padding="1"
+                             Margin="0,0,10,0">
+
+                    <Editor Grid.Column="1" Grid.Row="22"
+                            BackgroundColor="White"
+                            HeightRequest="75"
+                            Text="{Binding FabricItem.Notes}" />
+
                 </StackLayout>
 
-                <!--Row 22-->
-                <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="23"
+                <!--Row 24 -->
+                <!--<Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="23"
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"
                        BackgroundColor="#2A0944"
@@ -349,7 +367,15 @@
                        FontAttributes="Bold"
                        FontSize="Small"
                        Margin="0,0,0,0"
-                       Text="End of Form - Tap 'Save' on top to save changes" />
+                       Text="End of Form - Tap 'Save' on top to save changes" />-->
+                <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="23"
+                        Text="Save"
+                        BackgroundColor="MediumBlue"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        Command="{Binding Save}"
+                        CornerRadius="0" />
             </Grid>
         </StackLayout>
     </ScrollView>
