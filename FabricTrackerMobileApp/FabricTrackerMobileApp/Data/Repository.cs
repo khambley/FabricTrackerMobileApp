@@ -66,6 +66,7 @@ namespace FabricTrackerMobileApp.Data
         }
         #endregion
 
+        #region CreateConnection
         private async Task CreateConnection()
         {
             if (_connection != null)
@@ -114,16 +115,17 @@ namespace FabricTrackerMobileApp.Data
                     Width = 60,
                     BackgroundColor = "Blue",
                     AccentColor1 = "Red",
-                    Source = "Joann Fabrics",
+                    SourceName = "Joann Fabrics",
                     PurchaseDate = DateTime.Now,
                     ReleaseDate = Convert.ToDateTime("2011-01-01"),
                     DateAdded = DateTime.Now,
                 });
             }
         }
-
-        #region MainCategories
+        #endregion
         
+        #region MainCategories
+
         public async Task<List<MainCategory>> GetMainCategories()
         {
             await CreateConnection();

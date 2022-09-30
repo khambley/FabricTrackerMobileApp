@@ -18,6 +18,9 @@ namespace FabricTrackerMobileApp.Models
 
         public string ImagePath { get; set; }
 
+        //TODO: Add property to repository
+        public string ImageBase64 { get; set; }
+
         public int MainCategoryId { get; set; }
 
         public int SubCategoryId { get; set; }
@@ -41,7 +44,8 @@ namespace FabricTrackerMobileApp.Models
 
         public string Notes { get; set; }
 
-        public string Source { get; set; }
+        //TODO: change name of property in table in repository
+        public string SourceName { get; set; }
 
         public string SourceUrl { get; set; }
 
