@@ -184,9 +184,12 @@
                        HorizontalTextAlignment="End"
                        FontSize="Small" />
 
-                <Picker Grid.Column="1" Grid.Row="8"
+                <!--<Picker Grid.Column="1" Grid.Row="8"
                         Margin="0,0,10,0"
-                        SelectedItem="{Binding FabricItem.Width}"/>
+                        SelectedItem="{Binding FabricItem.Width}"/>-->
+                <Entry Grid.Column="1" Grid.Row="8"
+                       Margin="0,0,10,0"
+                       Text="{Binding FabricItem.Width}" />
 
                 <!--Row 10 Details Heading-->
                 <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="9"
