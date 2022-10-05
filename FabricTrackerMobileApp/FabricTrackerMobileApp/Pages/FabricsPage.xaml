@@ -17,7 +17,7 @@
 
         <Button Text="Toggle Filter" />
 
-        <ListView Grid.Row="1" RowHeight="75" ItemsSource="{Binding Items}">
+        <ListView Grid.Row="1" RowHeight="80" ItemsSource="{Binding Items}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -39,8 +39,8 @@
                              <Label FontSize="Small">
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="Category: " FontAttributes="Bold" FontSize="Small"/>
-                                            <Span Text="{Binding FabricItem.MainCategoryName}"></Span>
+                                            <!--<Span Text="Category: " FontAttributes="Bold" FontSize="Small"/>-->
+                                            <Span Text="{Binding Item.MainCategoryName}"></Span>
                                             <Span Text=" > "></Span>
                                             <Span Text="{Binding Item.SubCategoryName}"></Span>
                                         </FormattedString>

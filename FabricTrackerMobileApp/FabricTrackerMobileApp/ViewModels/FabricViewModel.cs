@@ -24,8 +24,8 @@ namespace FabricTrackerMobileApp.ViewModels
             this.repository = repository;
             Item = item;
             ImageSource = LoadPhoto();
-            //Item.MainCategoryName = GetMainCategoryName();
-            //Item.SubCategoryName = GetSubCategoryName();
+            Item.MainCategoryName = GetMainCategoryName();
+            Item.SubCategoryName = GetSubCategoryName();
         }
 
         private ImageSource LoadPhoto()
@@ -44,11 +44,11 @@ namespace FabricTrackerMobileApp.ViewModels
             }
         }
 
-        public string GetMainCategoryName() => repository.GetMainCategoryById(Item.MainCategoryId).Result.MainCategoryName;
+        public string GetMainCategoryName() => repository.GetMainCategoryById(Item.MainCategoryId).MainCategoryName;
 
         public string GetSubCategoryName()
         {
-            return repository.GetSubCategoryById(Item.SubCategoryId).Result.SubCategoryName;
+            return repository.GetSubCategoryById(Item.SubCategoryId).SubCategoryName;
         }
 
 
