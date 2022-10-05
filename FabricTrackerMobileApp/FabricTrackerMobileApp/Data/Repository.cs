@@ -31,7 +31,45 @@ namespace FabricTrackerMobileApp.Data
             await CreateConnection();
             return await _connection.Table<Fabric>().ToListAsync();
         }
+        public async Task<string> GetUniqueItemCode()
+        {
+            var fabricsList = await GetFabrics();
+            var lastFabricInDB = fabricsList[fabricsList.Count - 1].Id;
 
+            var newFabricId = lastFabricInDB + 1;
+
+            string leadingZeroes = "";
+
+            if (newFabricId > 0 && newFabricId < 10)
+            {
+                leadingZeroes = "0000";
+            }
+            else if (newFabricId > 9 && newFabricId < 100)
+            {
+                leadingZeroes = "000";
+            }
+            else if (newFabricId > 99 && newFabricId < 1000)
+            {
+                leadingZeroes = "00";
+            }
+            else if (newFabricId > 999 && newFabricId < 10000)
+            {
+                leadingZeroes = "0";
+            }
+            else
+            {
+                leadingZeroes = "";
+            }
+            var uniqueFabricItemCode = "FAB"
+                + "-"
+                + leadingZeroes
+                + newFabricId.ToString()
+                + "-"
+                + Guid.NewGuid().ToString().ToUpper().Substring(0, 4);
+
+            return uniqueFabricItemCode;
+
+        }
         public async Task AddFabric(Fabric fabric)
         {
             await CreateConnection();

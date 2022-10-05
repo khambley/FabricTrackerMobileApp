@@ -47,7 +47,7 @@ namespace FabricTrackerMobileApp.ViewModels
             await repository.AddOrUpdate(FabricItem);
             await Navigation.PopAsync();
         });
-
+        
         public ICommand CaptureImageCommand => new Command(async () =>
         {
             var photo = await MediaPicker.CapturePhotoAsync();
@@ -61,23 +61,45 @@ namespace FabricTrackerMobileApp.ViewModels
                 return null;
 
             //var newFile = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
+            FabricItem.ItemCode = Task.Run(async () => await repository.GetUniqueItemCode()).Result;//repository.GetUniqueItemCode().Result; //"TEST-001";
+
+            var uniqueFileName = FabricItem.ItemCode + Path.GetExtension(photo.FileName);
 
             // get the image stream
             var stream = await photo.OpenReadAsync();
 
-            //save the file as a Base64 string to model so we can save it in db
+            // get the documents path on device
+            var documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "images");
+
+            // create images folder if it doesn't exist
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
+
+            // create image filename based on item code
+            var newFile = Path.Combine(documentsPath, uniqueFileName);
+
+            // save image file to local storage
+            using (var newStream = File.OpenWrite(newFile))
+                await stream.CopyToAsync(newStream);
+
+            FabricItem.ImagePath = newFile;
+
+            ImagePath = newFile;
+
+
+            // To display image...
+            // get image from stream
+            stream = await photo.OpenReadAsync();
+
+            //set the ImageBytes property
             using (var memoryStream = new System.IO.MemoryStream())
             {
                 await stream.CopyToAsync(memoryStream);
-                var result = memoryStream.ToArray();
-                FabricItem.ImageBase64 = Convert.ToBase64String(result);
+                ImageBytes = memoryStream.ToArray();
             }
-
-            //to display image
-            ImageBytes = System.Convert.FromBase64String(FabricItem.ImageBase64);
+            // set the ImageSource property from the ImageBytes byte array
             ImageSource = ImageSource.FromStream(() => new MemoryStream(ImageBytes));
 
-            //ImagePath = newFile;
             return stream;
         }
 
