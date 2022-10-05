@@ -4,6 +4,9 @@ using System.Windows.Input;
 using FabricTrackerMobileApp.Data;
 using FabricTrackerMobileApp.Pages;
 using Xamarin.Forms;
+using System.Collections.ObjectModel;
+using System.Linq;
+using FabricTrackerMobileApp.Models;
 
 namespace FabricTrackerMobileApp.ViewModels
 {
@@ -11,8 +14,13 @@ namespace FabricTrackerMobileApp.ViewModels
     {
         private readonly Repository repository;
 
+        public ObservableCollection<FabricViewModel> Items { get; set; }
+
         public FabricsViewModel(Repository repository)
         {
+            repository.OnItemAdded += (sender, item) => Items.Add(CreateFabricViewModel(item));
+            repository.OnItemUpdated += (sender, item) => Task.Run(async () => await LoadData());
+
             this.repository = repository;
             Task.Run(async () => await LoadData());
         }
@@ -23,6 +31,18 @@ namespace FabricTrackerMobileApp.ViewModels
         });
 
         private async Task LoadData()
+        {
+            var items = await repository.GetFabrics();
+            var itemViewModels = items.Select(i => CreateFabricViewModel(i));
+            Items = new ObservableCollection<FabricViewModel>(itemViewModels);
+        }
+        private FabricViewModel CreateFabricViewModel(Fabric item)
+        {
+            var itemViewModel = new FabricViewModel(item);
+            itemViewModel.ItemStatusChanged += ItemStatusChanged;
+            return itemViewModel;
+        }
+        private void ItemStatusChanged(object sender, EventArgs e)
         {
 
         }

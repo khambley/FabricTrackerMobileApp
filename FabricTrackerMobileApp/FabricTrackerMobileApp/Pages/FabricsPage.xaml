@@ -17,12 +17,57 @@
 
         <Button Text="Toggle Filter" />
 
-        <ListView Grid.Row="1">
+        <ListView Grid.Row="1" RowHeight="100" ItemsSource="{Binding Items}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="0,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*" />
+                            <ColumnDefinition Width="0.6*" />
+                            <ColumnDefinition Width="0.2*" />
+                        </Grid.ColumnDefinitions>
 
+                        <!-- Col 1-->
+                        <Image Source="{Binding Item.ImageSource}" Grid.Column="0" />
+
+                        <!-- Col 2-->
+                        <StackLayout Grid.Column="1">
+                             <Label FontSize="Small">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Category: " FontAttributes="Bold" FontSize="Small"/>
+                                            <Span Text="{Binding FabricItem.MainCategoryName}"></Span>
+                                            <Span Text=" > "></Span>
+                                            <Span Text="{Binding Item.SubCategoryName}"></Span>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Item #: " FontSize="Small" FontAttributes="Italic" />
+                                            <Span Text="{Binding Item.ItemCode}" FontAttributes="Italic" FontSize="Small" TextDecorations="Underline" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Name: " FontSize="Small" />
+                                            <Span Text="{Binding Item.Name}" FontSize="Small" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                        </StackLayout>
+
+                        <!--Col 3-->
+                        <Label Text="{Binding Item.TotalInches}" Grid.Column="2" />
+                    </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
-
     </Grid>
-
-
 </ContentPage>
 
