@@ -18,12 +18,15 @@ namespace FabricTrackerMobileApp.Models
 
         public string ImagePath { get; set; }
 
-        //TODO: Add property to repository
         public string ImageBase64 { get; set; }
 
         public int MainCategoryId { get; set; }
 
+        public string MainCategoryName { get; set; }
+
         public int SubCategoryId { get; set; }
+
+        public string SubCategoryName { get; set; }
 
         public int? TotalInches { get; set; }
 
@@ -40,7 +43,6 @@ namespace FabricTrackerMobileApp.Models
         public string AccentColor2 { get; set; }
 
         public string AccentColor3 { get; set; }
-
 
         public string Notes { get; set; }
 

@@ -38,7 +38,7 @@ namespace FabricTrackerMobileApp.ViewModels
         }
         private FabricViewModel CreateFabricViewModel(Fabric item)
         {
-            var itemViewModel = new FabricViewModel(item);
+            var itemViewModel = new FabricViewModel(item, repository);
             itemViewModel.ItemStatusChanged += ItemStatusChanged;
             return itemViewModel;
         }

@@ -31,6 +31,7 @@ namespace FabricTrackerMobileApp.Data
             await CreateConnection();
             return await _connection.Table<Fabric>().ToListAsync();
         }
+
         public async Task<string> GetUniqueItemCode()
         {
             var fabricsList = await GetFabrics();
@@ -70,6 +71,7 @@ namespace FabricTrackerMobileApp.Data
             return uniqueFabricItemCode;
 
         }
+
         public async Task AddFabric(Fabric fabric)
         {
             await CreateConnection();
@@ -170,6 +172,14 @@ namespace FabricTrackerMobileApp.Data
             var list = await _connection.Table<MainCategory>().ToListAsync();
             return list;
         }
+
+        public async Task<MainCategory> GetMainCategoryById(int Id)
+        {
+            await CreateConnection();
+            var mainCategory = await _connection.Table<MainCategory>().Where(mc => mc.MainCategoryId == Id).FirstOrDefaultAsync();
+            return mainCategory;
+        }
+
         public async Task AddMainCategory(MainCategory mainCategory)
         {
             await CreateConnection();
@@ -262,6 +272,14 @@ namespace FabricTrackerMobileApp.Data
         {
             await CreateConnection();
             return await _connection.Table<SubCategory>().Where(mc => mc.MainCategoryId == Id).ToListAsync();
+        }
+
+        public async Task<SubCategory> GetSubCategoryById(int Id)
+        {
+            await CreateConnection();
+            var subCategory = await _connection.Table<SubCategory>().Where(sc => sc.SubCategoryId == Id).FirstOrDefaultAsync();
+            return subCategory;
+
         }
 
         public async Task AddSubCategory(SubCategory subCategory)

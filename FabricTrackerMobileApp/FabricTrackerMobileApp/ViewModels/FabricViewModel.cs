@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using FabricTrackerMobileApp.Data;
 using FabricTrackerMobileApp.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -9,6 +10,7 @@ namespace FabricTrackerMobileApp.ViewModels
 {
     public class FabricViewModel : ViewModelBase
     {
+        private readonly Repository repository;
         public Fabric Item { get; private set; }
 
         public ImageSource ImageSource { get; set; }
@@ -17,10 +19,13 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public event EventHandler ItemStatusChanged;
 
-        public FabricViewModel(Fabric item)
+        public FabricViewModel(Fabric item, Repository repository)
         {
+            this.repository = repository;
             Item = item;
             ImageSource = LoadPhoto();
+            //Item.MainCategoryName = GetMainCategoryName();
+            //Item.SubCategoryName = GetSubCategoryName();
         }
 
         private ImageSource LoadPhoto()
@@ -39,8 +44,14 @@ namespace FabricTrackerMobileApp.ViewModels
             }
         }
 
+        public string GetMainCategoryName() => repository.GetMainCategoryById(Item.MainCategoryId).Result.MainCategoryName;
 
-        
+        public string GetSubCategoryName()
+        {
+            return repository.GetSubCategoryById(Item.SubCategoryId).Result.SubCategoryName;
+        }
+
+
     }
 }
 
