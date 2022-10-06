@@ -60,7 +60,7 @@ namespace FabricTrackerMobileApp.ViewModels
             if (photo == null)
                 return null;
 
-            FabricItem.ItemCode = "FAB-001";//Task.Run(async () => await repository.GetUniqueItemCode()).Result;
+            FabricItem.ItemCode = repository.GetUniqueItemCode();
 
             var uniqueFileName = FabricItem.ItemCode + Path.GetExtension(photo.FileName);
 

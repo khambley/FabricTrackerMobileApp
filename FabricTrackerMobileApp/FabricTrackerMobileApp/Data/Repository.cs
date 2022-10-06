@@ -32,9 +32,10 @@ namespace FabricTrackerMobileApp.Data
             return await _connection.Table<Fabric>().ToListAsync();
         }
 
-        public async Task<string> GetUniqueItemCode()
+        public string GetUniqueItemCode()
         {
-            var fabricsList = await GetFabrics();
+            var fabricsList = Task.Run(async () => await GetFabrics()).Result;
+
             var lastFabricInDB = fabricsList[fabricsList.Count - 1].Id;
 
             var newFabricId = lastFabricInDB + 1;
