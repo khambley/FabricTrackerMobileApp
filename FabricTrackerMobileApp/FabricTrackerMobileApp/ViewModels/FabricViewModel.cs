@@ -17,6 +17,8 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public byte[] ImageBytes { get; set; }
 
+        public decimal TotalYards { get; set; }
+
         public event EventHandler ItemStatusChanged;
 
         public FabricViewModel(Fabric item, Repository repository)
@@ -26,6 +28,8 @@ namespace FabricTrackerMobileApp.ViewModels
             ImageSource = LoadPhoto();
             Item.MainCategoryName = GetMainCategoryName();
             Item.SubCategoryName = GetSubCategoryName();
+            TotalYards = Item.TotalInches != null ? (decimal)Item.TotalInches / 36 : 0;
+
         }
 
         private ImageSource LoadPhoto()

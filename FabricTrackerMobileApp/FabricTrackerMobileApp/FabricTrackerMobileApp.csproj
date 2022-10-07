@@ -16,6 +16,7 @@
     <None Remove="Autofac" />
     <None Remove="Pages\" />
     <None Remove="Xamarin.Forms.Visual.Material" />
+    <None Remove="Converters\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,5 +34,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
 </Project>

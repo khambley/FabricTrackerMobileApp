@@ -27,9 +27,10 @@
                     <RowDefinition Height="40" />
                     <!--Row 5-->
                     <RowDefinition Height="25" />
-
+                    <!--Row 6-->
                     <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
+                    <!--Row 7-->
+                    <RowDefinition Height="80" />
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
@@ -66,8 +67,8 @@
                        Aspect="AspectFill" />
 
                 <StackLayout Grid.Column="1" Grid.Row="0">
-                    <Button Text="Choose Image" Command="{Binding ChooseImageCommand}" />
-                    <Button Text="Capture Image" Command="{Binding ChooseImageCommand}" />
+                    <Button Text="Choose Image" Command="{Binding ChooseImageCommand}" BackgroundColor="Blue" TextColor="White" FontAttributes="Bold" />
+                    <Button Text="Capture Image" Command="{Binding ChooseImageCommand}" BackgroundColor="Green" TextColor="White" FontAttributes="Bold" />
                 </StackLayout>
 
                 <!--Row 2 MainCategory Picker-->
@@ -125,16 +126,16 @@
                         
 
                 <!--Row 5 Add New SubCategory Button-->
-                <Label Grid.Column="1" Grid.Row="4">
+                <Label Grid.Column="1" Grid.Row="4" TextColor="Blue" VerticalTextAlignment="Start" Padding="5,0,0,0" FontAttributes="Bold">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="&#x2b;" FontFamily="{StaticResource FontAwesomeSolid}" TextColor="Blue" FontSize="Small">
+                            <Span Text="&#x2b;" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="Small">
                                 <Span.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding AddSubCategoryCommand}" />
                                 </Span.GestureRecognizers>
                             </Span>
 
-                            <Span Text=" Add New SubCategory" TextColor="Blue" FontSize="Small">
+                            <Span Text=" Add New SubCategory" FontSize="Small">
                                 <Span.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding AddSubCategoryCommand}" />
                                 </Span.GestureRecognizers>
@@ -150,20 +151,61 @@
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="Name" />
-                <Entry Grid.Column="1" Grid.Row="5" Margin="0,0,10,0" Text="{Binding FabricItem.Name}" />
+                <Entry Grid.Column="1" Grid.Row="5" Margin="0,0,10,0" Text="{Binding FabricItem.Name}" TextColor="Blue" />
 
                 <!--Row 7 Remaining Inches-->
-                <Label Grid.Column="0" Grid.Row="6"
-                       Padding="10,0,0,0"
-                       VerticalTextAlignment="Center"
-                       HorizontalTextAlignment="End"
-                       FontSize="Small"
-                       Text="Remaining Qty (in inches)*" />
-                <Entry Grid.Column="1" Grid.Row="6"
-                       Placeholder="Enter Total Inches Remaining..."
-                       Margin="0,0,10,0"
-                       Text="{Binding FabricItem.TotalInches}" />
+                <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Padding="0,0,10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*" />
+                        <ColumnDefinition Width="0.3*" />
+                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="0.2*" />
+                    </Grid.ColumnDefinitions>
 
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0"
+                           Grid.Row="0"
+                           Padding="10,0,0,0"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="End"
+                           FontSize="Small"
+                           Text="Qty (in inches)" />
+
+                    <Entry Grid.Column="1"
+                           Grid.Row="0"
+                           Placeholder="Total Inches Remaining..."
+                           Margin="0,0,10,0"
+                           Text="{Binding FabricItem.TotalInches}" />
+
+                    <Label Grid.Column="2"
+                           Grid.Row="0"
+                           Padding="10,0,0,0"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Start"
+                           FontSize="Small"
+                           Text="Total Yards" />
+
+                    <Label Grid.Column="3"
+                           Grid.Row="0"
+                           Text="{Binding TotalYards, StringFormat='{0:F2}'}"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Start" />
+
+                    <Button Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            Grid.Row="1"
+                            Text="Calculate Total Yds"
+                            BackgroundColor="Blue"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="Small"
+                            Margin="0,5,0,5"
+                            Command="{Binding CalculateTotalYardsCommand}" />
+                </Grid>
                 <!--Row 8 Fat Qtr Qty-->
                 <Label Grid.Column="0" Grid.Row="7"
                        Padding="10,0,0,0"
@@ -178,15 +220,12 @@
 
                 <!--Row 9 Width-->
                 <Label Grid.Column="0" Grid.Row="8"
-                       Text="Width"
+                       Text="Width of Fabric"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small" />
 
-                <!--<Picker Grid.Column="1" Grid.Row="8"
-                        Margin="0,0,10,0"
-                        SelectedItem="{Binding FabricItem.Width}"/>-->
                 <Entry Grid.Column="1" Grid.Row="8"
                        Margin="0,0,10,0"
                        Text="{Binding FabricItem.Width}" />

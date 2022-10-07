@@ -24,6 +24,8 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public byte[] ImageBytes { get; set; }
 
+        public decimal TotalYards { get; set; }//=> FabricItem.TotalInches != null ? (decimal)FabricItem.TotalInches / 36 : 0;
+
         public ObservableCollection<MainCategory> MainCategoriesList { get; set; }
 
         public ObservableCollection<SubCategory> SubCategoriesList { get; set; }
@@ -47,7 +49,11 @@ namespace FabricTrackerMobileApp.ViewModels
             await repository.AddOrUpdate(FabricItem);
             await Navigation.PopAsync();
         });
-        
+        public ICommand CalculateTotalYardsCommand => new Command(() =>
+        {
+            TotalYards = FabricItem.TotalInches != null ? (decimal)FabricItem.TotalInches / 36 : 0;
+        });
+
         public ICommand CaptureImageCommand => new Command(async () =>
         {
             var photo = await MediaPicker.CapturePhotoAsync();

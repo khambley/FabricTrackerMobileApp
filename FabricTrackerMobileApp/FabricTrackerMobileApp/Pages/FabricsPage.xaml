@@ -24,8 +24,8 @@
                         <Grid Padding="0,0,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.2*" />
-                            <ColumnDefinition Width="0.7*" />
-                            <ColumnDefinition Width="0.1*" />
+                            <ColumnDefinition Width="0.6*" />
+                            <ColumnDefinition Width="0.2*" />
                         </Grid.ColumnDefinitions>
 
                         <!-- Col 1-->
@@ -65,7 +65,17 @@
                         </StackLayout>
 
                         <!--Col 3-->
-                        <Label Text="{Binding Item.TotalInches}" Grid.Column="2" VerticalTextAlignment="Center" />
+                        <Label Grid.Column="2"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Start">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding TotalYards, StringFormat='{0:F2}'}" />
+                                        <Span Text=" yds" FontSize="Small" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+
+                            </Label>
                     </Grid>
                     </ViewCell>
                 </DataTemplate>
