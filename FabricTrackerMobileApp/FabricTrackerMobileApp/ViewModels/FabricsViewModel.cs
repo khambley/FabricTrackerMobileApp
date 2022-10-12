@@ -16,6 +16,31 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public ObservableCollection<FabricViewModel> Items { get; set; }
 
+        public FabricViewModel SelectedItem
+        {
+            get { return null; }
+            set
+            {
+                Device.BeginInvokeOnMainThread(async () => await NavigateToFabricItem(value));
+                OnPropertyChanged(nameof(SelectedItem));
+            }
+        }
+
+        private async Task NavigateToFabricItem(FabricViewModel item)
+        {
+            if (item == null)
+            {
+                return;
+            }
+            var itemView = Resolver.Resolve<FabricItemView>("selectedMainCategory", repository.GetMainCategoryById(item.Item.MainCategoryId));
+            var viewModel = itemView.BindingContext as FabricItemViewModel;
+
+            viewModel.FabricItem = item.Item;
+            //viewModel.SelectedMainCategory = repository.GetMainCategoryById(item.Item.MainCategoryId);
+            
+            await Navigation.PushAsync(itemView);
+        }
+
         public FabricsViewModel(Repository repository)
         {
             repository.OnItemAdded += (sender, item) => Items.Add(CreateFabricViewModel(item));

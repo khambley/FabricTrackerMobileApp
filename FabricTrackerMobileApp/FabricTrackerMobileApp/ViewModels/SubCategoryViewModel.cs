@@ -9,6 +9,7 @@ namespace FabricTrackerMobileApp.ViewModels
     public class SubCategoryViewModel : ViewModelBase
     {
         private readonly Repository repository;
+
         public SubCategoryViewModel(SubCategory subCategoryItem, Repository repository)
         {
             SubCategoryItem = subCategoryItem;

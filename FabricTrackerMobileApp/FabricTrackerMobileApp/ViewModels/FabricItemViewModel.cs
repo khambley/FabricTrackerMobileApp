@@ -40,12 +40,13 @@ namespace FabricTrackerMobileApp.ViewModels
         public MainCategory SelectedMainCategory { get; set; }
 
         public SubCategory SelectedSubCategory { get; set; }
+
         #region Commands
 
         public ICommand Save => new Command(async () =>
         {
-            FabricItem.MainCategoryId = SelectedMainCategory.MainCategoryId;
-            FabricItem.SubCategoryId = SelectedSubCategory.SubCategoryId;
+            FabricItem.MainCategoryId = SelectedMainCategory != null ? SelectedMainCategory.MainCategoryId : FabricItem.MainCategoryId;
+            FabricItem.SubCategoryId = SelectedSubCategory != null ? SelectedSubCategory.SubCategoryId : FabricItem.SubCategoryId;
             await repository.AddOrUpdate(FabricItem);
             await Navigation.PopAsync();
         });

@@ -12,6 +12,8 @@ namespace FabricTrackerMobileApp.Pages
             InitializeComponent();
             viewModel.Navigation = Navigation;
             BindingContext = viewModel;
+
+            ItemsListView.ItemSelected += (s, e) => ItemsListView.SelectedItem = null;
         }
     }
 }
