@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -35,10 +36,10 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public ICommand BackupDataCommand => new Command(async () =>
         {
-            await ExportDb(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "FabricTrackerMobileApp.db"));
+            await ZipAndExportDbAndImages(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
         });
 
-        public async Task ExportDb(string filePath)
+        public async Task ZipAndExportDbAndImages(string filePath)
         {
             var tempDirectory = Path.Combine(FileSystem.CacheDirectory, "Export");
 
@@ -53,13 +54,11 @@ namespace FabricTrackerMobileApp.ViewModels
                 Debug.WriteLine(ex);
 
             }
-            var exportFilename = $"FabricTrackerAppDb_{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.db";
+            var exportFilename = $"FabricTrackerAppDb_{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.zip";
 
             Directory.CreateDirectory(tempDirectory);
 
-            var exportFilePath = Path.Combine(tempDirectory, exportFilename);
-
-            File.Copy(filePath, exportFilePath);
+            var exportDbFilePath = Path.Combine(tempDirectory, exportFilename);
 
             // For testing only - to see where db is exported
 
@@ -69,14 +68,17 @@ namespace FabricTrackerMobileApp.ViewModels
 
             //});
 
+            ZipFile.CreateFromDirectory(filePath, exportDbFilePath, CompressionLevel.NoCompression, true);
+
             await Share.RequestAsync(new ShareFileRequest
             {
-                Title = "My FabricTracker App Data",
-                File = new ShareFile(exportFilePath)
-            });   
+                Title = "MyFabricTracker App Data",
+                //File = new ShareFile(exportDbFilePath)
+                File = new ShareFile(exportDbFilePath)
+            });
+            
         }
         
-
     }
 }
 

@@ -77,14 +77,14 @@ namespace FabricTrackerMobileApp.ViewModels
             var stream = await photo.OpenReadAsync();
 
             // get the documents path on device
-            var imageFilesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "images");
+            var documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "images");
 
             // create images folder if it doesn't exist
-            if (!Directory.Exists(imageFilesPath))
-                Directory.CreateDirectory(imageFilesPath);
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
 
             // create image filename based on item code
-            var newFile = Path.Combine(imageFilesPath, uniqueFileName);
+            var newFile = Path.Combine(documentsPath, uniqueFileName);
 
             // save image file to local storage
             using (var newStream = File.OpenWrite(newFile))
