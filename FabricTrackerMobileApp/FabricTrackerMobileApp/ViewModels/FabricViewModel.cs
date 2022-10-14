@@ -6,6 +6,7 @@ using FabricTrackerMobileApp.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
+
 namespace FabricTrackerMobileApp.ViewModels
 {
     public class FabricViewModel : ViewModelBase
@@ -32,10 +33,12 @@ namespace FabricTrackerMobileApp.ViewModels
 
         }
 
-        private ImageSource LoadPhoto()
+        public ImageSource LoadPhoto()
         {
             //retrieve the image from ImagePath in db.
-            var filePath = Item.ImagePath;
+
+            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "images/" + Item.ImagePath);
+
             if (File.Exists(filePath))
             {
                 ImageBytes = File.ReadAllBytes(filePath);

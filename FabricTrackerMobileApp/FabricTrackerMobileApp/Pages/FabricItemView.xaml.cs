@@ -8,13 +8,13 @@ namespace FabricTrackerMobileApp.Pages
 {
     public partial class FabricItemView : ContentPage
     {
-        public FabricItemView(MainCategory selectedMainCategory, FabricItemViewModel viewModel)
+        public FabricItemView(FabricItemViewModel viewModel)
         {
             InitializeComponent();
             viewModel.Navigation = Navigation;
             BindingContext = viewModel;
 
-            mcPicker.SelectedItem = selectedMainCategory;
+            //mcPicker.SelectedItem = selectedMainCategory;
         }
 
         void mcPicker_SelectedIndexChanged(System.Object sender, System.EventArgs e)

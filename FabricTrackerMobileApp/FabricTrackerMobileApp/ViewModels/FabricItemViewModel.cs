@@ -35,6 +35,7 @@ namespace FabricTrackerMobileApp.ViewModels
             this.repository = repository;
             MainCategoriesList = GetMainCategoriesList();
             FabricItem = new Fabric();
+            
         }
 
         public MainCategory SelectedMainCategory { get; set; }
@@ -50,6 +51,7 @@ namespace FabricTrackerMobileApp.ViewModels
             await repository.AddOrUpdate(FabricItem);
             await Navigation.PopAsync();
         });
+
         public ICommand CalculateTotalYardsCommand => new Command(() =>
         {
             TotalYards = FabricItem.TotalInches != null ? (decimal)FabricItem.TotalInches / 36 : 0;
@@ -75,20 +77,21 @@ namespace FabricTrackerMobileApp.ViewModels
             var stream = await photo.OpenReadAsync();
 
             // get the documents path on device
-            var documentsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "images");
+            var imageFilesPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "images");
 
             // create images folder if it doesn't exist
-            if (!Directory.Exists(documentsPath))
-                Directory.CreateDirectory(documentsPath);
+            if (!Directory.Exists(imageFilesPath))
+                Directory.CreateDirectory(imageFilesPath);
 
             // create image filename based on item code
-            var newFile = Path.Combine(documentsPath, uniqueFileName);
+            var newFile = Path.Combine(imageFilesPath, uniqueFileName);
 
             // save image file to local storage
             using (var newStream = File.OpenWrite(newFile))
                 await stream.CopyToAsync(newStream);
 
-            FabricItem.ImagePath = newFile;
+            //FabricItem.ImagePath = newFile;
+            FabricItem.ImagePath = uniqueFileName;
 
             ImagePath = newFile;
 
@@ -108,7 +111,28 @@ namespace FabricTrackerMobileApp.ViewModels
 
             return stream;
         }
+        private ImageSource DisplayPhoto()
+        {
+            // retrieve image from ImagePath in db.
+            if (FabricItem.ImagePath != null)
+            {
+                var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "images/" + FabricItem.ImagePath);
 
+                if (File.Exists(filePath))
+                {
+                    ImageBytes = File.ReadAllBytes(filePath);
+                    ImageSource = ImageSource.FromStream(() => new MemoryStream(ImageBytes));
+                    return ImageSource;
+                }
+                else
+                {
+                    return null;
+                }
+            } else
+            {
+                return null;
+            }
+        }
         public ICommand ChooseImageCommand => new Command(async () =>
         {
             var photo = await MediaPicker.PickPhotoAsync();

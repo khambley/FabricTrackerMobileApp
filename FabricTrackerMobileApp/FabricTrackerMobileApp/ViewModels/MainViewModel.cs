@@ -5,6 +5,7 @@ using System.IO.Compression;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FabricTrackerMobileApp.Data;
+using FabricTrackerMobileApp.Models;
 using FabricTrackerMobileApp.Pages;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -34,50 +35,48 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public ICommand BackupDataCommand => new Command(async () =>
         {
-            await CompressAndExportFolder(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+            await ExportDb(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "FabricTrackerMobileApp.db"));
         });
 
-        public async Task CompressAndExportFolder(string folderPath)
+        public async Task ExportDb(string filePath)
         {
-            // Get a temp cache directory
-            var exportTempDirectory = Path.Combine(FileSystem.CacheDirectory, "Export");
+            var tempDirectory = Path.Combine(FileSystem.CacheDirectory, "Export");
 
-            // Delete existing exports, if any
             try
             {
-                if (Directory.Exists(exportTempDirectory))
-                {
-                    Directory.Delete(exportTempDirectory, true);
-                }
+                if (Directory.Exists(tempDirectory))
+                    Directory.Delete(tempDirectory);
             }
             catch (Exception ex)
             {
                 // Log errors
                 Debug.WriteLine(ex);
+
             }
+            var exportFilename = $"FabricTrackerAppDb_{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.db";
 
-            // Get a timestamped filename
-            var exportFilename = $"FabricTrackerAppData_{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.zip";
+            Directory.CreateDirectory(tempDirectory);
 
-            Directory.CreateDirectory(exportTempDirectory);
+            var exportFilePath = Path.Combine(tempDirectory, exportFilename);
 
-            var exportFilePath = Path.Combine(exportTempDirectory, exportFilename);
+            File.Copy(filePath, exportFilePath);
 
-            if (File.Exists(exportFilePath))
-            {
-                File.Delete(exportFilePath);
-            }
+            // For testing only - to see where db is exported
 
-            // Zip everything up
-            ZipFile.CreateFromDirectory(folderPath, exportFilePath, CompressionLevel.Fastest, true);
+            //Device.BeginInvokeOnMainThread(() =>
+            //{
+            //    App.Current.MainPage.DisplayAlert("Export Path", $"Db saved in {exportFilePath}", "OK");
+
+            //});
 
             await Share.RequestAsync(new ShareFileRequest
             {
                 Title = "My FabricTracker App Data",
                 File = new ShareFile(exportFilePath)
-            });
+            });   
         }
-     
+        
+
     }
 }
 

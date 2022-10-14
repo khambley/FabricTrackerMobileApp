@@ -131,7 +131,7 @@
 
                 <Picker Grid.Column="1" Grid.Row="4"
                         Margin="0,0,10,0"
-                        ItemsSource="{Binding SubCategoriesList}"
+                        ItemsSource="{Binding SubCategoriesList}"  
                         ItemDisplayBinding="{Binding SubCategoryName}"
                         x:Name="scPicker"
                         Title="--Select New SubCategory--"

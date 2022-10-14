@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using System.Linq;
 using FabricTrackerMobileApp.Models;
+using System.IO;
 
 namespace FabricTrackerMobileApp.ViewModels
 {
@@ -36,6 +37,7 @@ namespace FabricTrackerMobileApp.ViewModels
             var viewModel = itemView.BindingContext as FabricItemViewModel;
 
             viewModel.FabricItem = item.Item;
+            viewModel.ImageSource = item.LoadPhoto();
             //viewModel.SelectedMainCategory = repository.GetMainCategoryById(item.Item.MainCategoryId);
             
             await Navigation.PushAsync(itemView);
@@ -55,6 +57,7 @@ namespace FabricTrackerMobileApp.ViewModels
             await Navigation.PushAsync(fabricItemView);
         });
 
+
         private async Task LoadData()
         {
             var items = await repository.GetFabrics();
@@ -71,6 +74,7 @@ namespace FabricTrackerMobileApp.ViewModels
         {
 
         }
+        
     }
 }
 
