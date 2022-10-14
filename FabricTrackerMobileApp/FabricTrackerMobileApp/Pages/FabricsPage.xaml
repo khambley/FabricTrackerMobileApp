@@ -25,6 +25,12 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Delete"
+                                      Command="{Binding DeleteFabricCommand}"
+                                      IsDestructive="True" />
+
+                        </ViewCell.ContextActions>
                         <Grid Padding="0,0,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.2*" />

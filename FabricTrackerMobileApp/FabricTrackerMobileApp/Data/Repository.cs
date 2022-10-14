@@ -102,8 +102,17 @@ namespace FabricTrackerMobileApp.Data
         public async Task DeleteFabric(Fabric fabric)
         {
             await CreateConnection();
-            await _connection.DeleteAsync(fabric);
-            OnItemDeleted?.Invoke(this, fabric);
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                bool answer = await App.Current.MainPage.DisplayAlert("Confirm the Deletion", $"Are you sure you want to delete the item, {fabric.Name}, from the database?", "OK", "Cancel");
+                if (answer)
+                {
+                    await _connection.DeleteAsync(fabric);
+                    OnItemUpdated?.Invoke(this, fabric);
+                }
+            });
+            //await _connection.DeleteAsync(fabric);
+            //OnItemDeleted?.Invoke(this, fabric);
         }
         #endregion
 

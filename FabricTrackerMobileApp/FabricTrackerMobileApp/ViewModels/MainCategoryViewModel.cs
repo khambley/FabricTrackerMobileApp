@@ -20,11 +20,6 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public ICommand DeleteMainCategory => new Command(async () =>
         {
-            //bool answer = await page.DisplayAlert($"Delete Subcategory", "Are you sure you want to delete {SubCategoryItem}", "OK", "Cancel");
-            //if (answer)
-            //{
-
-            //}
             await repository.DeleteMainCategory(MainCategoryItem);
 
         });

@@ -69,8 +69,11 @@ namespace FabricTrackerMobileApp.ViewModels
             if (photo == null)
                 return null;
 
-            FabricItem.ItemCode = repository.GetUniqueItemCode();
-
+            if (FabricItem.ItemCode == null)
+            {
+                FabricItem.ItemCode = repository.GetUniqueItemCode();
+            }
+            
             var uniqueFileName = FabricItem.ItemCode + Path.GetExtension(photo.FileName);
 
             // get the image stream

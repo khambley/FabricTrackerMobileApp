@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using FabricTrackerMobileApp.Data;
 using FabricTrackerMobileApp.Models;
 using Xamarin.Essentials;
@@ -32,6 +33,10 @@ namespace FabricTrackerMobileApp.ViewModels
             TotalYards = Item.TotalInches != null ? (decimal)Item.TotalInches / 36 : 0;
 
         }
+        public ICommand DeleteFabricCommand => new Command(async () =>
+        {
+            await repository.DeleteFabric(Item);
+        });
 
         public ImageSource LoadPhoto()
         {
