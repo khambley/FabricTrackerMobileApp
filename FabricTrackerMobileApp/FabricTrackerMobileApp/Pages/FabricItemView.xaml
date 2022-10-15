@@ -18,7 +18,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <!--Row 1-->
-                    <RowDefinition Height="100" />
+                    <RowDefinition Height="120" />
                     <!--Row 2-->
                     <RowDefinition Height="20" />
                     <!--Row 3-->
@@ -63,13 +63,13 @@
                 <BoxView Grid.Column="0" Grid.Row="0" BackgroundColor="LightGray" />
                 <Image Grid.Column="0" Grid.Row="0"
                        Source="{Binding ImageSource}"
-                       HeightRequest="100"
-                       WidthRequest="100"
+                       HeightRequest="120"
+                       WidthRequest="120"
                        Aspect="AspectFill" />
 
                 <StackLayout Grid.Column="1" Grid.Row="0" Margin="10,0,10,0">
                     <Button Text="Choose Image" Command="{Binding ChooseImageCommand}" BackgroundColor="Blue" TextColor="White" FontAttributes="Bold" />
-                    <Button Text="Capture Image" Command="{Binding ChooseImageCommand}" BackgroundColor="Green" TextColor="White" FontAttributes="Bold" />
+                    <Button Text="Capture Image" Command="{Binding CaptureImageCommand}" BackgroundColor="Green" TextColor="White" FontAttributes="Bold" />
                 </StackLayout>
 
                 <!--Row 2 Current Category Label -->
