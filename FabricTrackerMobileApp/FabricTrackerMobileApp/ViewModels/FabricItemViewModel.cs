@@ -30,12 +30,23 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public ObservableCollection<SubCategory> SubCategoriesList { get; set; }
 
+        public bool ShowCategoryLabel
+        {
+            get { return !string.IsNullOrEmpty(FabricItem.MainCategoryName); }
+        }
+
+        public bool ShowItemCodeLabel
+        {
+            get { return !string.IsNullOrEmpty(FabricItem.ItemCode); }
+        }
+
         public FabricItemViewModel(Repository repository)
         {
+            repository.OnMainCategoryItemAdded += (sender, item) => MainCategoriesList.Add(item);
+            repository.OnSubCategoryItemAdded += (sender, item) => SubCategoriesList.Add(item);
             this.repository = repository;
             MainCategoriesList = GetMainCategoriesList();
-            FabricItem = new Fabric();
-            
+            FabricItem = new Fabric();          
         }
 
         public MainCategory SelectedMainCategory { get; set; }
@@ -172,9 +183,17 @@ namespace FabricTrackerMobileApp.ViewModels
             {
                 var mainCategoryId = SelectedMainCategory.MainCategoryId;
                 SubCategoriesList = GetSubCategoriesList(mainCategoryId);
-            }
-            
+            }            
         }
+
+        //public void OnSubCategoryChosen(object sender, EventArgs args)
+        //{
+        //    if (SelectedSubCategory != null)
+        //    {
+        //        var subCategoryId = SelectedSubCategory.SubCategoryId;
+        //        SubCategoriesList = GetSubCategoriesList(subCategoryId);
+        //    }
+        //}
     }
 }
 

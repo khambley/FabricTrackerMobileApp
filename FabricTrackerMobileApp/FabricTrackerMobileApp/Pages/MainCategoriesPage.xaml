@@ -13,7 +13,7 @@
 
     <ListView x:Name="ItemsListView"
               ItemsSource="{Binding MainCategoryItems}"
-              SelectedItem="{Binding SelectedItem}">
+              SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>

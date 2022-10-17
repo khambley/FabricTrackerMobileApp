@@ -51,6 +51,7 @@ namespace FabricTrackerMobileApp.ViewModels
             this.repository = repository;
             Task.Run(async () => await LoadData());
         }
+
         public ICommand AddItem => new Command(async () =>
         {
             var fabricItemView = Resolver.Resolve<FabricItemView>();
