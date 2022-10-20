@@ -89,10 +89,15 @@ namespace FabricTrackerMobileApp.ViewModels
             {
                 MainCategoriesList = new ObservableCollection<MainCategory>(repository.GetMainCategories().Result);
             }
-            
+
             if (!ShowAll)
             {
-                items = items.Where(x => x.MainCategoryName == SelectedMainCategory.MainCategoryName).ToList(); 
+                items = items.Where(x => x.MainCategoryName == SelectedMainCategory.MainCategoryName).ToList();
+
+                if(SelectedSubCategory != null)
+                {
+                    items = items.Where(x => x.MainCategoryName == SelectedMainCategory.MainCategoryName && x.SubCategoryName == SelectedSubCategory.SubCategoryName).ToList();
+                }
             }
 
             var itemViewModels = items.Select(i => CreateFabricViewModel(i));

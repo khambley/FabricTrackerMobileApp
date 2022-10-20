@@ -24,7 +24,12 @@
                     SelectedIndexChanged="mcPicker_SelectedIndexChanged"
                     />
 
-            <Picker ItemsSource="{Binding SubCategoriesList}" />
+            <Picker ItemsSource="{Binding SubCategoriesList}"
+                    ItemDisplayBinding="{Binding SubCategoryName}"
+                    x:Name="scPicker"
+                    Title="--Select SubCategory"
+                    SelectedItem="{Binding SelectedSubCategory}"
+                    />
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                 <Button Command="{Binding FilterByCategoryCommand}"
