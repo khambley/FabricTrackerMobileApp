@@ -15,7 +15,34 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Button Text="Toggle Filter" />
+        <StackLayout VerticalOptions="StartAndExpand" Margin="10">
+            <Picker ItemsSource="{Binding MainCategoriesList}"
+                    ItemDisplayBinding="{Binding MainCategoryName}"
+                    x:Name="mcPicker"
+                    Title="--Select MainCategory--"
+                    SelectedItem="{Binding SelectedMainCategory, Mode=TwoWay }"
+                    SelectedIndexChanged="mcPicker_SelectedIndexChanged"
+                    />
+
+            <Picker ItemsSource="{Binding SubCategoriesList}" />
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Command="{Binding FilterByCategoryCommand}"
+                    BackgroundColor="Blue"
+                    TextColor="White"
+                    Text="Apply Filter"
+                    WidthRequest="100"
+                    />
+
+                <Button Command="{Binding ClearFilterCommand}"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    Text="Clear Filter"
+                    Padding="20,0,20,0"
+                    />
+            </StackLayout>
+            
+        </StackLayout>
 
         <ListView x:Name="ItemsListView"
                   Grid.Row="1"

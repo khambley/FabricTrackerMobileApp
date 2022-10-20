@@ -15,6 +15,11 @@ namespace FabricTrackerMobileApp.Pages
 
             ItemsListView.ItemSelected += (s, e) => ItemsListView.SelectedItem = null;
         }
+
+        void mcPicker_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+        {
+            (BindingContext as FabricsViewModel).OnMainCategoryChosen(sender, e);
+        }
     }
 }
 
