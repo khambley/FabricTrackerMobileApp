@@ -15,7 +15,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackLayout VerticalOptions="StartAndExpand" Margin="10">
+        <StackLayout VerticalOptions="StartAndExpand" Margin="20">
+            <Label Text="Filter by Category / SubCategory" />
             <Picker ItemsSource="{Binding MainCategoriesList}"
                     ItemDisplayBinding="{Binding MainCategoryName}"
                     x:Name="mcPicker"
@@ -36,7 +37,7 @@
                     BackgroundColor="Blue"
                     TextColor="White"
                     Text="Apply Filter"
-                    WidthRequest="100"
+                    Padding="20,0,20,0"
                     />
 
                 <Button Command="{Binding ClearFilterCommand}"
