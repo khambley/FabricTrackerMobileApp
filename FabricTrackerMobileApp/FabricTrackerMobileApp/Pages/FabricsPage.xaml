@@ -55,17 +55,15 @@
                     </StackLayout>
                 </StackLayout>
             </local:Accordion.AccordionContentView>
-
             <local:Accordion.IndicatorView>
                 <Label Text="&#xf107;" FontSize="Large" FontFamily="{StaticResource FontAwesomeSolid}" TextColor="White" />
             </local:Accordion.IndicatorView>
 
         </local:Accordion>
-        
-
+      
         <ListView x:Name="ItemsListView"
                   Grid.Row="1"
-                  RowHeight="80"
+                  RowHeight="120"
                   ItemsSource="{Binding Items}"
                   SelectedItem="{Binding SelectedItem}">
             <ListView.ItemTemplate>
@@ -79,8 +77,8 @@
                         </ViewCell.ContextActions>
                         <Grid Padding="0,0,0,0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.2*" />
-                            <ColumnDefinition Width="0.6*" />
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="0.5*" />
                             <ColumnDefinition Width="0.2*" />
                         </Grid.ColumnDefinitions>
 
@@ -88,14 +86,15 @@
                         <Image Source="{Binding ImageSource}" Grid.Column="0"
                                HeightRequest="75"
                                WidthRequest="75"
-                               Aspect="AspectFill" />
+                               Margin="5"
+                               Aspect="AspectFill"
+                               />
 
                         <!-- Col 2-->
                         <StackLayout Grid.Column="1" Padding="0,5,0,10">
                              <Label FontSize="Small">
                                     <Label.FormattedText>
-                                        <FormattedString>
-                                            <!--<Span Text="Category: " FontAttributes="Bold" FontSize="Small"/>-->
+                                        <FormattedString>  
                                             <Span Text="{Binding Item.MainCategoryName}"></Span>
                                             <Span Text=" > "></Span>
                                             <Span Text="{Binding Item.SubCategoryName}"></Span>
