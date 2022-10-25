@@ -2,6 +2,11 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:local="clr-namespace:FabricTrackerMobileApp.CustomControls"
+    xmlns:loc="clr-namespace:FabricTrackerMobileApp"
     x:Class="FabricTrackerMobileApp.Pages.FabricsPage"
     Title="Fabrics List">
 
@@ -11,44 +16,52 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackLayout VerticalOptions="StartAndExpand" Margin="20">
-            <Label Text="Filter by Category / SubCategory" />
-            <Picker ItemsSource="{Binding MainCategoriesList}"
-                    ItemDisplayBinding="{Binding MainCategoryName}"
-                    x:Name="mcPicker"
-                    Title="--Select MainCategory--"
-                    SelectedItem="{Binding SelectedMainCategory, Mode=TwoWay }"
-                    SelectedIndexChanged="mcPicker_SelectedIndexChanged"
-                    />
+        <local:Accordion Title="Filter by Category / SubCategory" HeaderBackgroundColor="Blue" HeaderTextColor="White">
+            <local:Accordion.AccordionContentView>
+                <StackLayout VerticalOptions="StartAndExpand" Margin="5,0,5,10">
+                    <Picker ItemsSource="{Binding MainCategoriesList}"
+                            ItemDisplayBinding="{Binding MainCategoryName}"
+                            x:Name="mcPicker"
+                            Title="--Select MainCategory--"
+                            SelectedItem="{Binding SelectedMainCategory, Mode=TwoWay }"
+                            SelectedIndexChanged="mcPicker_SelectedIndexChanged"
+                            />
 
-            <Picker ItemsSource="{Binding SubCategoriesList}"
-                    ItemDisplayBinding="{Binding SubCategoryName}"
-                    x:Name="scPicker"
-                    Title="--Select SubCategory"
-                    SelectedItem="{Binding SelectedSubCategory}"
-                    />
+                    <Picker ItemsSource="{Binding SubCategoriesList}"
+                            ItemDisplayBinding="{Binding SubCategoryName}"
+                            x:Name="scPicker"
+                            Title="--Select SubCategory"
+                            SelectedItem="{Binding SelectedSubCategory}"
+                            />
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button Command="{Binding FilterByCategoryCommand}"
-                    BackgroundColor="Blue"
-                    TextColor="White"
-                    Text="Apply Filter"
-                    Padding="20,0,20,0"
-                    />
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                        <Button Command="{Binding FilterByCategoryCommand}"
+                            BackgroundColor="Blue"
+                            TextColor="White"
+                            Text="Apply Filter"
+                            Padding="20,0,20,0"
+                            />
 
-                <Button Command="{Binding ClearFilterCommand}"
-                    BackgroundColor="Green"
-                    TextColor="White"
-                    Text="Clear Filter"
-                    Padding="20,0,20,0"
-                    />
-            </StackLayout>
-            
-        </StackLayout>
+                        <Button Command="{Binding ClearFilterCommand}"
+                            BackgroundColor="Green"
+                            TextColor="White"
+                            Text="Clear Filter"
+                            Padding="20,0,20,0"
+                            />
+                    </StackLayout>
+                </StackLayout>
+            </local:Accordion.AccordionContentView>
+
+            <local:Accordion.IndicatorView>
+                <Label Text="&#xf107;" FontSize="Large" FontFamily="{StaticResource FontAwesomeSolid}" TextColor="White" />
+            </local:Accordion.IndicatorView>
+
+        </local:Accordion>
+        
 
         <ListView x:Name="ItemsListView"
                   Grid.Row="1"
