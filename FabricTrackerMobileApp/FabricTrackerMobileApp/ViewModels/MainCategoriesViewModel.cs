@@ -69,6 +69,8 @@ namespace FabricTrackerMobileApp.ViewModels
         public MainCategoriesViewModel(Repository repository)
         {
             repository.OnMainCategoryItemAdded += (sender, item) => MainCategoryItems.Add(CreateMainCategoryItemViewModel(item));
+            repository.OnMainCategoryItemAdded += (sender, item) => MainCategoryItems = new ObservableCollection<MainCategoryViewModel>(MainCategoryItems.OrderBy(x => x.MainCategoryItem.MainCategoryName));
+
             repository.OnMainCategoryItemUpdated += (sender, item) => Task.Run(async () => await LoadData());
             this.repository = repository;
             Task.Run(async () => await LoadData());
@@ -76,7 +78,7 @@ namespace FabricTrackerMobileApp.ViewModels
         }
 
         private async Task LoadData()
-        {
+        { 
             var mainCategories = await repository.GetMainCategories();
             var mainCategoriesViewModels = mainCategories.Select(mc => CreateMainCategoryItemViewModel(mc));
             MainCategoryItems = new ObservableCollection<MainCategoryViewModel>(mainCategoriesViewModels);

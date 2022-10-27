@@ -179,7 +179,7 @@ namespace FabricTrackerMobileApp.Data
         public async Task<List<MainCategory>> GetMainCategories()
         {
             await CreateConnection();
-            var list = await _connection.Table<MainCategory>().ToListAsync();
+            var list = await _connection.Table<MainCategory>().OrderBy(x => x.MainCategoryName).ToListAsync();
             return list;
         }
 
@@ -281,7 +281,7 @@ namespace FabricTrackerMobileApp.Data
         public async Task<List<SubCategory>> GetSubCategories(int Id)
         {
             await CreateConnection();
-            return await _connection.Table<SubCategory>().Where(mc => mc.MainCategoryId == Id).ToListAsync();
+            return await _connection.Table<SubCategory>().Where(mc => mc.MainCategoryId == Id).OrderBy(sc => sc.SubCategoryName).ToListAsync();
         }
 
         public SubCategory GetSubCategoryById(int Id)

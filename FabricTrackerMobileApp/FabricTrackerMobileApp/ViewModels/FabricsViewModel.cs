@@ -37,6 +37,8 @@ namespace FabricTrackerMobileApp.ViewModels
             }
         }
 
+        public bool NoItemsToDisplayLabel { get; set; }
+
         private async Task NavigateToFabricItem(FabricViewModel item)
         {
             if (item == null)
@@ -60,6 +62,7 @@ namespace FabricTrackerMobileApp.ViewModels
 
             this.repository = repository;
             ShowAll = true;
+            NoItemsToDisplayLabel = false;
             Task.Run(async () => await LoadData());
         }
 
@@ -78,6 +81,7 @@ namespace FabricTrackerMobileApp.ViewModels
         public ICommand ClearFilterCommand => new Command(async () =>
         {
             ShowAll = true;
+            NoItemsToDisplayLabel = false;
             await LoadData();
         });
 
@@ -97,6 +101,10 @@ namespace FabricTrackerMobileApp.ViewModels
                 if(SelectedSubCategory != null)
                 {
                     items = items.Where(x => x.MainCategoryName == SelectedMainCategory.MainCategoryName && x.SubCategoryName == SelectedSubCategory.SubCategoryName).ToList();
+                }
+                if(items.Count == 0)
+                {
+                    NoItemsToDisplayLabel = true;
                 }
             }
 

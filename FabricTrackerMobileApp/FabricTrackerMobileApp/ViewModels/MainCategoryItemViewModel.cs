@@ -25,7 +25,7 @@ namespace FabricTrackerMobileApp.ViewModels
         public MainCategoryItemViewModel(Repository repository)
         {
             repository.OnSubCategoryItemAdded += (sender, item) => SubCategoryItems.Add(CreateSubCategoryItemViewModel(item));
-
+            repository.OnSubCategoryItemAdded += (sender, item) => SubCategoryItems = new ObservableCollection<SubCategoryViewModel>(SubCategoryItems.OrderBy(x => x.SubCategoryItem.SubCategoryName));
             repository.OnSubCategoryItemUpdated += (sender, item) => Task.Run(async () => await LoadData());
 
             this.repository = repository;

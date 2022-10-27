@@ -17,10 +17,13 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <local:Accordion Title="Filter by Category / SubCategory" HeaderBackgroundColor="Blue" HeaderTextColor="White">
+        <local:Accordion Title="Filter by Category / SubCategory"
+                         HeaderBackgroundColor="Blue"
+                         HeaderTextColor="White">
             <local:Accordion.AccordionContentView>
                 <StackLayout VerticalOptions="StartAndExpand" Margin="5,0,5,10">
                     <Picker ItemsSource="{Binding MainCategoriesList}"
@@ -58,11 +61,16 @@
             <local:Accordion.IndicatorView>
                 <Label Text="&#xf107;" FontSize="Large" FontFamily="{StaticResource FontAwesomeSolid}" TextColor="White" />
             </local:Accordion.IndicatorView>
-
         </local:Accordion>
-      
+
+        <Label Grid.Row="1"
+               Text="0 items to display"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Start"
+               IsVisible="{Binding NoItemsToDisplayLabel}" />
+
         <ListView x:Name="ItemsListView"
-                  Grid.Row="1"
+                  Grid.Row="2"
                   RowHeight="120"
                   ItemsSource="{Binding Items}"
                   SelectedItem="{Binding SelectedItem}">
