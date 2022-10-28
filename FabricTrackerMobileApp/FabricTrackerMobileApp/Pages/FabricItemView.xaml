@@ -77,9 +77,6 @@
                     <RowDefinition Height="80" />
                     <!--Row 25-->
                     <RowDefinition Height="40" />
-   
-
-
                 </Grid.RowDefinitions>
 
                 <!--Row 1 Image Capture-->
@@ -130,8 +127,6 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-
-                
 
                 <!--Row 3 MainCategory Picker-->
                 <Label Grid.Column="0" Grid.Row="3"

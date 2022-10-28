@@ -63,6 +63,7 @@ namespace FabricTrackerMobileApp.ViewModels
         {
             FabricItem.MainCategoryId = SelectedMainCategory != null ? SelectedMainCategory.MainCategoryId : FabricItem.MainCategoryId;
             FabricItem.SubCategoryId = SelectedSubCategory != null ? SelectedSubCategory.SubCategoryId : FabricItem.SubCategoryId;
+
             await repository.AddOrUpdate(FabricItem);
             await Navigation.PopAsync();
         });
@@ -78,6 +79,36 @@ namespace FabricTrackerMobileApp.ViewModels
             var stream = await LoadPhotoAsync(photo);
         });
 
+        
+        public ICommand ChooseImageCommand => new Command(async () =>
+        {
+            var photo = await MediaPicker.PickPhotoAsync();
+            var stream = await LoadPhotoAsync(photo);
+        });
+
+        public ICommand AddMainCategoryCommand => new Command(async () =>
+        {
+            var mainCategoriesPage = Resolver.Resolve<MainCategoriesPage>();
+            await Navigation.PushAsync(mainCategoriesPage);
+        });
+
+        public ICommand AddSubCategoryCommand => new Command(async () =>
+        {
+            if(SelectedMainCategory != null)
+            {
+                var subCategoryItemView = Resolver.Resolve<SubCategoryItemView>("mainCategoryItem", SelectedMainCategory);
+                await Navigation.PushAsync(subCategoryItemView);
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.Current.MainPage.DisplayAlert("Error", "You must select a Main Category first in order to add a Sub Category", "Go Back");
+                });
+            }
+            
+        });
+
         private async Task<Stream> LoadPhotoAsync(FileResult photo)
         {
             // cancelled
@@ -88,7 +119,7 @@ namespace FabricTrackerMobileApp.ViewModels
             {
                 FabricItem.ItemCode = repository.GetUniqueItemCode();
             }
-            
+
             var uniqueFileName = FabricItem.ItemCode + Path.GetExtension(photo.FileName);
 
             // get the image stream
@@ -129,6 +160,7 @@ namespace FabricTrackerMobileApp.ViewModels
 
             return stream;
         }
+
         private ImageSource DisplayPhoto()
         {
             // retrieve image from ImagePath in db.
@@ -146,28 +178,13 @@ namespace FabricTrackerMobileApp.ViewModels
                 {
                     return null;
                 }
-            } else
+            }
+            else
             {
                 return null;
             }
         }
-        public ICommand ChooseImageCommand => new Command(async () =>
-        {
-            var photo = await MediaPicker.PickPhotoAsync();
-            var stream = await LoadPhotoAsync(photo);
-        });
 
-        public ICommand AddMainCategoryCommand => new Command(async () =>
-        {
-            var mainCategoriesPage = Resolver.Resolve<MainCategoriesPage>();
-            await Navigation.PushAsync(mainCategoriesPage);
-        });
-
-        public ICommand AddSubCategoryCommand => new Command(async () =>
-        {
-            var subCategoryItemView = Resolver.Resolve<SubCategoryItemView>("mainCategoryItem", SelectedMainCategory);
-            await Navigation.PushAsync(subCategoryItemView);
-        });
         public ObservableCollection<MainCategory> GetMainCategoriesList()
         {
             var items = Task.Run(async () => await repository.GetMainCategories());

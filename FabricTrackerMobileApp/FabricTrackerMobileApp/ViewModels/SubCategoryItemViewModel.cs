@@ -24,9 +24,20 @@ namespace FabricTrackerMobileApp.ViewModels
         }
         public ICommand Save => new Command(async () =>
         {
-            SubCategoryItem.MainCategoryId = MainCategoryId;
-            await repository.AddSubCategory(SubCategoryItem);
-            await Navigation.PopAsync();
+            if (SubCategoryItem.SubCategoryName != null)
+            {
+                SubCategoryItem.MainCategoryId = MainCategoryId;
+                await repository.AddSubCategory(SubCategoryItem);
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.Current.MainPage.DisplayAlert("Error", "A Subcategory is required. Add an entry or press the < Back button in nav bar to cancel.", "Go Back");
+                });
+            }
+            
         });
         public ICommand DeleteSubCategory => new Command(async () =>
         {

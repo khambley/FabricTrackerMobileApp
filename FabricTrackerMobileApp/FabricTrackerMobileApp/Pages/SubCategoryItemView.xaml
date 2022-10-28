@@ -22,20 +22,25 @@
                 </FormattedString>
             </Label.FormattedText>
         </Label>
+
    <BoxView HorizontalOptions="FillAndExpand"
                  HeightRequest="1"
                  Color="#1690F4"
                  />
+
     <Label Text="Add or Edit..."
            FontSize="Small"
            Margin="0,15,0,0" />
     <Label Text="SubCategory Name: " />
-        <Entry Text="{Binding SubCategoryItem.SubCategoryName}"
-               Margin="0,0,0,10"
-               TextColor="DarkBlue"
-               PlaceholderColor="Red"
-               />
+
+    <Entry Text="{Binding SubCategoryItem.SubCategoryName}"
+            Margin="0,0,0,10"
+            TextColor="DarkBlue"
+            PlaceholderColor="Red"
+            />
+      
     </StackLayout>
+
 </ContentPage>
 
 
