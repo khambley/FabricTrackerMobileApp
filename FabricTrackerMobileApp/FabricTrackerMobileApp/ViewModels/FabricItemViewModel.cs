@@ -64,13 +64,24 @@ namespace FabricTrackerMobileApp.ViewModels
             FabricItem.MainCategoryId = SelectedMainCategory != null ? SelectedMainCategory.MainCategoryId : FabricItem.MainCategoryId;
             FabricItem.SubCategoryId = SelectedSubCategory != null ? SelectedSubCategory.SubCategoryId : FabricItem.SubCategoryId;
 
+
+            // Uncategorized - default maincategory / subcategory if none is chosen 
+            if (FabricItem.MainCategoryId == 0)
+            {
+                FabricItem.MainCategoryId = 1;
+            }
+            if(FabricItem.SubCategoryId == 0)
+            {
+                FabricItem.SubCategoryId = 1;
+            }
+
             await repository.AddOrUpdate(FabricItem);
             await Navigation.PopAsync();
         });
 
         public ICommand CalculateTotalYardsCommand => new Command(() =>
         {
-            TotalYards = FabricItem.TotalInches != null ? (decimal)FabricItem.TotalInches / 36 : 0;
+            TotalYards = FabricItem.TotalInches != null ? (decimal)FabricItem.TotalInches / (decimal)36.00 : 0;
         });
 
         public ICommand CaptureImageCommand => new Command(async () =>

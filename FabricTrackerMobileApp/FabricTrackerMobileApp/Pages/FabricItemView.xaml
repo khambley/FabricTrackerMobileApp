@@ -209,8 +209,8 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.3*" />
                         <ColumnDefinition Width="0.3*" />
-                        <ColumnDefinition Width="0.2*" />
                         <ColumnDefinition Width="0.1*" />
+                        <ColumnDefinition Width="0.2*" />
                         <ColumnDefinition Width="0.1*" />
                     </Grid.ColumnDefinitions>
 
@@ -228,7 +228,8 @@
 
                     <Entry Grid.Column="1"
                            Grid.Row="0"
-                           Placeholder="Total Inches Remaining..."
+                           Placeholder="Enter Inches"
+                           FontSize="Small"
                            Margin="0,0,10,0"
                            Keyboard="Numeric"
                            HorizontalTextAlignment="End"
@@ -240,7 +241,7 @@
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Start"
                            FontSize="Small"
-                           Text="Total Yards" />
+                           Text="Yds" />
 
                     <Label Grid.Column="3"
                            Grid.Row="0"
