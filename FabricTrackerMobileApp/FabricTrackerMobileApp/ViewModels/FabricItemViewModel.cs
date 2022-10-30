@@ -30,6 +30,10 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public ObservableCollection<SubCategory> SubCategoriesList { get; set; }
 
+        public List<string> FabricTypesList { get; set; }
+
+        public List<string> MaterialTypesList { get; set; }
+
         public bool ShowCategoryLabel
         {
             get { return !string.IsNullOrEmpty(FabricItem.MainCategoryName); }
@@ -50,6 +54,8 @@ namespace FabricTrackerMobileApp.ViewModels
 
             this.repository = repository;
             MainCategoriesList = GetMainCategoriesList();
+            FabricTypesList = repository.GetFabricTypes();
+            MaterialTypesList = repository.GetMaterialTypes();
             FabricItem = new Fabric();          
         }
 
@@ -63,7 +69,6 @@ namespace FabricTrackerMobileApp.ViewModels
         {
             FabricItem.MainCategoryId = SelectedMainCategory != null ? SelectedMainCategory.MainCategoryId : FabricItem.MainCategoryId;
             FabricItem.SubCategoryId = SelectedSubCategory != null ? SelectedSubCategory.SubCategoryId : FabricItem.SubCategoryId;
-
 
             // Uncategorized - default maincategory / subcategory if none is chosen 
             if (FabricItem.MainCategoryId == 0)

@@ -74,6 +74,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bootstrapper.cs" />
     <None Include=".DS_Store" />
+    <Compile Include="CustomControls\CustomBorderedEntry.cs" />
+    <Compile Include="CustomControls\CustomBorderedPicker.cs" />
+    <Compile Include="CustomControls\CustomBorderedDatePicker.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -150,5 +153,8 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\FontAwesome-Solid-900.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomControls\" />
   </ItemGroup>
 </Project>

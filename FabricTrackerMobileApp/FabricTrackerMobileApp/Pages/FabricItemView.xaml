@@ -3,6 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="FabricTrackerMobileApp.Pages.FabricItemView"
+    xmlns:local="clr-namespace:FabricTrackerMobileApp.CustomControls"
     Title="Fabric Item">
 
     <ContentPage.ToolbarItems>
@@ -40,15 +41,17 @@
                     <RowDefinition Height="40" />
 
                     <!--Row 8 Qty and Total Yards-->
-                    <RowDefinition Height="40" />
+                    <RowDefinition Height="50" />
 
                     <!--Row 9 Fat Qtr Qty and WOF -->
                     <RowDefinition Height="40" />
 
                     <!--Row 10 Details Heading-->
                     <RowDefinition Height="50" />
+
                     <!--Row 11-->
-                    <RowDefinition Height="40" />
+                    <RowDefinition Height="80" />
+
                     <!--Row 12-->
                     <RowDefinition Height="40" />
                     <!--Row 13-->
@@ -74,6 +77,8 @@
                     <!--Row 23-->
                     <RowDefinition Height="40" />
                      <!--Row 24-->
+                    <RowDefinition Height="40" />
+                    <!--Row 25-->
                     <RowDefinition Height="80" />
                     <!--Row 25-->
                     <RowDefinition Height="40" />
@@ -136,12 +141,14 @@
                        FontSize="Small"
                        Text="MainCategory" />
 
-                <Picker Grid.Column="1" Grid.Row="3"
+                <local:BorderedPicker Grid.Column="1" Grid.Row="3"
                         Margin="0,0,0,0"
                         ItemsSource="{Binding MainCategoriesList}"
                         ItemDisplayBinding="{Binding MainCategoryName}"
                         x:Name="mcPicker"
-                        Title="--Select New MainCategory--"
+                        FontSize="Medium"
+                        HorizontalTextAlignment="Center"
+                        Title="Select New MainCategory"
                         SelectedItem="{Binding SelectedMainCategory, Mode=TwoWay }"
                         SelectedIndexChanged="mcPicker_SelectedIndexChanged"
                         />
@@ -163,12 +170,14 @@
                        FontSize="Small"
                        Text="SubCategory" />
 
-                <Picker Grid.Column="1" Grid.Row="4"
+                <local:BorderedPicker Grid.Column="1" Grid.Row="4"
                         Margin="0,0,0,0"
                         ItemsSource="{Binding SubCategoriesList}"  
                         ItemDisplayBinding="{Binding SubCategoryName}"
                         x:Name="scPicker"
-                        Title="--Select New SubCategory--"
+                        FontSize="Medium"
+                        HorizontalTextAlignment="Center"
+                        Title="Select New SubCategory"
                         SelectedItem="{Binding SelectedSubCategory}"
                         />
 
@@ -182,19 +191,23 @@
                         Command="{Binding AddSubCategoryCommand}" />
                     
 
-                <!--Row 7 Name -->
+                <!--Row 6 Name -->
                 <Label Grid.Column="0" Grid.Row="5"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="Name" />
-                <Entry Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2"
+
+                <local:BorderedEntry Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
+                       Placeholder="Enter Fabric Name"
+                       FontSize="Medium"
                        Text="{Binding FabricItem.Name}"
+                       ClearButtonVisibility="WhileEditing"
                        TextColor="Blue" />
 
-                <!--Row 11 Details Heading-->
+                <!--Row 7 Remaining Quantity Heading-->
                 <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6"
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"
@@ -215,7 +228,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="40" />
+                        <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
 
                     <Label Grid.Column="0"
@@ -224,15 +237,16 @@
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="End"
                            FontSize="Small"
-                           Text="Qty (in inches)" />
+                           Text="Fabric Qty (in inches)" />
 
-                    <Entry Grid.Column="1"
+                    <local:BorderedEntry Grid.Column="1"
                            Grid.Row="0"
-                           Placeholder="Enter Inches"
-                           FontSize="Small"
+                           Placeholder="Inches"
+                           FontSize="Large"
                            Margin="0,0,10,0"
                            Keyboard="Numeric"
-                           HorizontalTextAlignment="End"
+                           ClearButtonVisibility="WhileEditing"
+                           HorizontalTextAlignment="Center"
                            Text="{Binding FabricItem.TotalInches}" />
 
                     <Label Grid.Column="2"
@@ -245,6 +259,7 @@
 
                     <Label Grid.Column="3"
                            Grid.Row="0"
+                           FontSize="Large"
                            Text="{Binding TotalYards, StringFormat='{0:F2}'}"
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center" />
@@ -264,9 +279,9 @@
                 <Grid Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="3" Padding="3,0,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.3*" />
+                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="0.2*" />
                         <ColumnDefinition Width="0.3*" />
-                        <ColumnDefinition Width="0.2*" />
-                        <ColumnDefinition Width="0.2*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50" />
@@ -280,10 +295,13 @@
                            FontSize="Small"
                            Text="Fat Qtr Qty" />
 
-                    <Entry Grid.Column="1" Grid.Row="0" 
+                    <local:BorderedEntry Grid.Column="1" Grid.Row="0" 
                            Margin="0,0,15,0"
                            Keyboard="Numeric"
-                           HorizontalTextAlignment="End"
+                           FontSize="Large"
+                           Placeholder="FQs"
+                           HorizontalTextAlignment="Center"
+                           ClearButtonVisibility="WhileEditing"
                            Text="{Binding FabricItem.FatQtrQty}"/>
 
                     <!--Row 8 Width of Fabric-->
@@ -294,10 +312,13 @@
                            HorizontalTextAlignment="Start"
                            FontSize="Small" />
 
-                    <Entry Grid.Column="3" Grid.Row="0"
+                    <local:BorderedEntry Grid.Column="3" Grid.Row="0"
                            Margin="0,0,10,0"
                            Keyboard="Numeric"
-                           HorizontalTextAlignment="End"
+                           FontSize="Large"
+                           Placeholder="Width"
+                           HorizontalTextAlignment="Center"
+                           ClearButtonVisibility="WhileEditing"
                            Text="{Binding FabricItem.Width}" />
                 </Grid>
 
@@ -311,56 +332,102 @@
                        Margin="0,10,0,0"
                        Text="Details" />
 
+                <!--Row 11 FabricType and MaterialType Pickers-->
+                <Grid Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="3" Padding="3,0,10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*" />
+                        <ColumnDefinition Width="0.7*" />
+                        
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0"
+                           Padding="0,0,0,0"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="End"
+                           FontSize="Small"
+                           Text="Fabric Type" />
+
+                    <local:BorderedPicker Grid.Column="1" Grid.Row="0"
+                        Margin="0,0,0,0"
+                        ItemsSource="{Binding FabricTypesList}"
+                        x:Name="ftPicker"
+                        Title="Select Fabric Type"
+                        SelectedItem="{Binding FabricItem.FabricType}"
+                        />
+
+                    <Label Grid.Column="0" Grid.Row="1"
+                           Padding="0,0,0,0"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="End"
+                           FontSize="Small"
+                           Text="Material Type" />
+
+                    <local:BorderedPicker Grid.Column="1" Grid.Row="1"
+                        Margin="0,0,0,0"
+                        ItemsSource="{Binding MaterialTypesList}"
+                        x:Name="mtPicker"
+                        Title="Select Material Type"
+                        SelectedItem="{Binding FabricItem.MaterialType}"
+                        />
+                </Grid>
+
                 <!--Row 12 Background Color-->
-                <Label Grid.Column="0" Grid.Row="10"
+                <Label Grid.Column="0" Grid.Row="11"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="Background Color" />
 
-                <Entry Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2"
+                <local:BorderedEntry Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
+                       ClearButtonVisibility="WhileEditing"
                        Text="{Binding FabricItem.BackgroundColor}" />
 
                 <!--Row 13 Accent Color 1-->
-                <Label Grid.Column="0" Grid.Row="11"
+                <Label Grid.Column="0" Grid.Row="12"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="Accent Color 1" />
 
-                <Entry Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2"
+                <local:BorderedEntry Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
+                       ClearButtonVisibility="WhileEditing"
                        Text="{Binding FabricItem.AccentColor1}" />
 
                 <!--Row 14 Accent Color 2-->
-                <Label Grid.Column="0" Grid.Row="12"
+                <Label Grid.Column="0" Grid.Row="13"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="Accent Color 2" />
 
-                <Entry Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="2"
+                <local:BorderedEntry Grid.Column="1" Grid.Row="13" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
                        Text="{Binding FabricItem.AccentColor2}" />
 
                 <!--Row 15 Accent Color 3-->
-                <Label Grid.Column="0" Grid.Row="13"
+                <Label Grid.Column="0" Grid.Row="14"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="Accent Color 3" />
 
-                <Entry Grid.Column="1" Grid.Row="13" Grid.ColumnSpan="2"
+                <local:BorderedEntry Grid.Column="1" Grid.Row="14" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
+                       ClearButtonVisibility="WhileEditing"
                        Text="{Binding FabricItem.AccentColor3}" />
 
                 <!--Row 16 Source Information Heading-->
-                <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="14"
+                <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="15"
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"
                        BackgroundColor="#2A0944"
@@ -370,91 +437,99 @@
                        Text="Source Information" />
 
                 <!--Row 17 Source Name-->
-                <Label Grid.Column="0" Grid.Row="15"
+                <Label Grid.Column="0" Grid.Row="16"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="Source Name" />
 
-                <Entry Grid.Column="1" Grid.Row="15" Grid.ColumnSpan="2"
+                <local:BorderedEntry Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
+                       ClearButtonVisibility="WhileEditing"
                        Text="{Binding FabricItem.SourceName}" />
 
                 <!--Row 18 Source Url-->
-                <Label Grid.Column="0" Grid.Row="16"
+                <Label Grid.Column="0" Grid.Row="17"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="Source Url" />
 
-                <Entry Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="2"
+                <local:BorderedEntry Grid.Column="1" Grid.Row="17" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
+                       ClearButtonVisibility="WhileEditing"
                        Text="{Binding FabricItem.SourceUrl}" />
 
                 <!--Row 19 Purchase Date-->
-                <Label Grid.Column="0" Grid.Row="17"
+                <Label Grid.Column="0" Grid.Row="18"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="Original Purchase Date" />
 
-                <DatePicker Grid.Column="1" Grid.Row="17" Grid.ColumnSpan="2"
+                <local:BorderedDatePicker Grid.Column="1" Grid.Row="18" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
+                       HorizontalOptions="Center"
+                       WidthRequest="300"
                        Date="{Binding FabricItem.PurchaseDate}" />
 
                 <!--Row 20 Release Date-->
-                <Label Grid.Column="0" Grid.Row="18"
+                <Label Grid.Column="0" Grid.Row="19"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="Release Date" />
 
-                <DatePicker Grid.Column="1" Grid.Row="18" Grid.ColumnSpan="2"
+                <local:BorderedDatePicker Grid.Column="1" Grid.Row="19" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
+                       HorizontalOptions="Center"
+                       WidthRequest="300"
                        Date="{Binding FabricItem.ReleaseDate}" />
 
                 <!--Row 21 Brand-->
-                <Label Grid.Column="0" Grid.Row="19"
+                <Label Grid.Column="0" Grid.Row="20"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="Brand" />
 
-                <Entry Grid.Column="1" Grid.Row="19" Grid.ColumnSpan="2"
+                <local:BorderedEntry Grid.Column="1" Grid.Row="20" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
+                       ClearButtonVisibility="WhileEditing"
                        Text="{Binding FabricItem.Brand}"/>
 
                 <!--Row 22 Designer-->
-                <Label Grid.Column="0" Grid.Row="20"
+                <Label Grid.Column="0" Grid.Row="21"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="Designer" />
 
-                <Entry Grid.Column="1" Grid.Row="20" Grid.ColumnSpan="2"
+                <local:BorderedEntry Grid.Column="1" Grid.Row="21" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
+                       ClearButtonVisibility="WhileEditing"
                        Text="{Binding FabricItem.Designer}" />
 
                 <!--Row 23 Is Discontinued-->
-                <Label Grid.Column="0" Grid.Row="21"
+                <Label Grid.Column="0" Grid.Row="22"
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="Center"
                        FontSize="Small"
                        Text="Discontinued?" />
 
-                <Switch Grid.Column="1" Grid.Row="21" HorizontalOptions="Start"
+                <Switch Grid.Column="1" Grid.Row="22" HorizontalOptions="Start"
                        Margin="0,0,10,0"
                        IsToggled="{Binding FabricItem.IsDiscontinued}" />
 
                 <!--Row 24 Misc Heading-->
-                <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="22"
+                <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="23"
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"
                        BackgroundColor="#2A0944"
@@ -464,19 +539,19 @@
                        Text="Misc." />
 
                 <!--Row 25 Notes-->
-                <Label Grid.Column="0" Grid.Row="23" 
+                <Label Grid.Column="0" Grid.Row="24" 
                        Padding="10,0,0,0"
                        VerticalTextAlignment="Center"
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="Notes" />
 
-                <StackLayout Grid.Column="1" Grid.Row="23" Grid.ColumnSpan="2"
-                             BackgroundColor="LightGray"
+                <StackLayout Grid.Column="1" Grid.Row="24" Grid.ColumnSpan="2"
+                             BackgroundColor="Black"
                              Padding="1"
                              Margin="0,0,10,0">
 
-                    <Editor Grid.Column="1" Grid.Row="23" Grid.ColumnSpan="2"
+                    <Editor Grid.Column="1" Grid.Row="24" Grid.ColumnSpan="2"
                             BackgroundColor="White"
                             HeightRequest="75"
                             Text="{Binding FabricItem.Notes}" />
@@ -484,7 +559,7 @@
                 </StackLayout>
 
                 <!--Row 26 Save Button -->
-                <Button Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="24"
+                <Button Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="25"
                         Text="Save"
                         BackgroundColor="MediumBlue"
                         TextColor="White"

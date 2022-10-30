@@ -114,6 +114,44 @@ namespace FabricTrackerMobileApp.Data
             //await _connection.DeleteAsync(fabric);
             //OnItemDeleted?.Invoke(this, fabric);
         }
+        public List<string> GetFabricTypes()
+        {
+            return new List<string>()
+            {
+                "",
+                "Woven",
+                "Chambray",
+                "Cordurory",
+                "Crepe",
+                "Denim",
+                "Flannel",
+                "Fleece",
+                "Jersey",
+                "Knit",
+                "Outdoor",
+                "Suiting",
+                "Terry Cloth"
+            };
+        }
+        public List<string> GetMaterialTypes()
+        {
+            return new List<string>()
+            {
+                "",
+                "Cotton",
+                "Chenille",
+                "Denim",
+                "Felt",
+                "Jacquard",
+                "Linen",
+                "Polyester",
+                "Rayon",
+                "Satin",
+                "Silk",
+                "Velvet",
+                "Wool",
+            };
+        }
         #endregion
 
         #region CreateConnection
@@ -165,7 +203,7 @@ namespace FabricTrackerMobileApp.Data
                     Width = 60,
                     BackgroundColor = "Blue",
                     AccentColor1 = "Red",
-                    SourceName = "Joann Fabrics",
+                    SourceName = "Sample Source Name",
                     PurchaseDate = DateTime.Now,
                     ReleaseDate = Convert.ToDateTime("2011-01-01"),
                     DateAdded = DateTime.Now,

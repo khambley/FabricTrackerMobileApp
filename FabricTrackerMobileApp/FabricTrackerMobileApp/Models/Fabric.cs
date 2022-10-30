@@ -8,7 +8,8 @@ namespace FabricTrackerMobileApp.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string ItemCode { get; set; } //Auto-generated when added
+        //Auto-generated when added to db
+        public string ItemCode { get; set; } 
 
         public string Name { get; set; }
 
@@ -34,6 +35,10 @@ namespace FabricTrackerMobileApp.Models
 
         public string FabricType { get; set; }
 
+        public string MaterialType { get; set; }
+
+        public string Location { get; set; }
+
         public int? Width { get; set; }
 
         public string BackgroundColor { get; set; }
@@ -46,7 +51,6 @@ namespace FabricTrackerMobileApp.Models
 
         public string Notes { get; set; }
 
-        //TODO: change name of property in table in repository
         public string SourceName { get; set; }
 
         public string SourceUrl { get; set; }
