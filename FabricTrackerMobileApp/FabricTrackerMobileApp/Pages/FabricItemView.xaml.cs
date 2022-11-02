@@ -26,6 +26,8 @@ namespace FabricTrackerMobileApp.Pages
         {
             (BindingContext as FabricItemViewModel).OnMainCategoryChosen(sender, e);
         }
+
+        
     }
 }
 

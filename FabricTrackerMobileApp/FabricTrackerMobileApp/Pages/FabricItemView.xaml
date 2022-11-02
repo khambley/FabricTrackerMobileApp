@@ -22,11 +22,11 @@
                     <!--Row 1 Image-->
                     <RowDefinition Height="120" />
 
-                    <!--Row 2 Current Category-->
+                    <!--Row 2 Item Code-->
                     <RowDefinition Height="20" />
 
-                    <!--Row 3 Item Code -->
-                    <RowDefinition Height="20" />
+                    <!--Row 3 Current Category -->
+                    <RowDefinition Height="40" />
 
                     <!--Row 4 MainCategory Picker-->
                     <RowDefinition Height="40" />
@@ -78,9 +78,11 @@
                     <RowDefinition Height="40" />
                      <!--Row 24-->
                     <RowDefinition Height="40" />
-                    <!--Row 25-->
-                    <RowDefinition Height="80" />
-                    <!--Row 25-->
+
+                    <!--Row 25 Notes Editor-->
+                    <RowDefinition Height="100" />
+
+                    <!--Row 26-->
                     <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
 
@@ -100,7 +102,7 @@
                     <Button Text="Capture Image" Command="{Binding CaptureImageCommand}" BackgroundColor="Green" TextColor="White" FontAttributes="Bold" />
                 </StackLayout>
 
-                <!--Row 3 Item Code -->
+                <!--Row 2 Item Code -->
                 <Label Grid.Column="0" Grid.Row="1"
                        Text="Item Code #"
                        FontSize="Small"
@@ -115,11 +117,12 @@
                        IsVisible="{Binding ShowItemCodeLabel}"
                        />
 
-                <!--Row 2 Current Category Label -->
+                <!--Row 3 Current Category Label -->
                 <Label Grid.Column="0" Grid.Row="2"
                        Text="Current Category"
-                       FontSize="Small"                   
-                       VerticalTextAlignment="Center"
+                       FontSize="Small"
+                       FontAttributes="Bold"
+                       VerticalTextAlignment="Start"
                        HorizontalTextAlignment="End" />
 
                 <Label Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"
@@ -204,6 +207,7 @@
                        Placeholder="Enter Fabric Name"
                        FontSize="Medium"
                        Text="{Binding FabricItem.Name}"
+                       HorizontalTextAlignment="Center"
                        ClearButtonVisibility="WhileEditing"
                        TextColor="Blue" />
 
@@ -215,14 +219,18 @@
                        TextColor="White"
                        FontAttributes="Bold"
                        Margin="0,0,0,0"
-                       Text="Remaining Quantity" />
+                       Text="Remaining Quantity"
+                       FontSize="Large" />
 
                 <!--Row 8 Remaining Inches-->
-                <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,0,10,0">
+                <Grid Grid.Row="7"
+                      Grid.Column="0"
+                      Grid.ColumnSpan="3"
+                      Padding="10,0,10,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.3*" />
-                        <ColumnDefinition Width="0.3*" />
-                        <ColumnDefinition Width="0.1*" />
+                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="0.2*" />
                         <ColumnDefinition Width="0.2*" />
                         <ColumnDefinition Width="0.1*" />
                     </Grid.ColumnDefinitions>
@@ -243,7 +251,7 @@
                            Grid.Row="0"
                            Placeholder="Inches"
                            FontSize="Large"
-                           Margin="0,0,10,0"
+                           Margin="0,0,0,0"
                            Keyboard="Numeric"
                            ClearButtonVisibility="WhileEditing"
                            HorizontalTextAlignment="Center"
@@ -253,7 +261,7 @@
                            Grid.Row="0"
                            Padding="10,0,0,0"
                            VerticalTextAlignment="Center"
-                           HorizontalTextAlignment="Start"
+                           HorizontalTextAlignment="Center"
                            FontSize="Small"
                            Text="Yds" />
 
@@ -330,7 +338,8 @@
                        TextColor="White"
                        FontAttributes="Bold"
                        Margin="0,10,0,0"
-                       Text="Details" />
+                       Text="Details"
+                       FontSize="Large" />
 
                 <!--Row 11 FabricType and MaterialType Pickers-->
                 <Grid Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="3" Padding="3,0,10,0">
@@ -356,6 +365,7 @@
                         ItemsSource="{Binding FabricTypesList}"
                         x:Name="ftPicker"
                         Title="Select Fabric Type"
+                        HorizontalTextAlignment="Center"
                         SelectedItem="{Binding FabricItem.FabricType}"
                         />
 
@@ -371,6 +381,7 @@
                         ItemsSource="{Binding MaterialTypesList}"
                         x:Name="mtPicker"
                         Title="Select Material Type"
+                        HorizontalTextAlignment="Center"
                         SelectedItem="{Binding FabricItem.MaterialType}"
                         />
                 </Grid>
@@ -386,6 +397,8 @@
                 <local:BorderedEntry Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
                        ClearButtonVisibility="WhileEditing"
+                       HorizontalTextAlignment="Center"
+                       Placeholder="Enter Background Color"
                        Text="{Binding FabricItem.BackgroundColor}" />
 
                 <!--Row 13 Accent Color 1-->
@@ -399,6 +412,8 @@
                 <local:BorderedEntry Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
                        ClearButtonVisibility="WhileEditing"
+                       HorizontalTextAlignment="Center"
+                       Placeholder="Enter Accent Color 1"
                        Text="{Binding FabricItem.AccentColor1}" />
 
                 <!--Row 14 Accent Color 2-->
@@ -411,6 +426,8 @@
 
                 <local:BorderedEntry Grid.Column="1" Grid.Row="13" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
+                       HorizontalTextAlignment="Center"
+                       Placeholder="Enter Accent Color 2"
                        Text="{Binding FabricItem.AccentColor2}" />
 
                 <!--Row 15 Accent Color 3-->
@@ -424,6 +441,8 @@
                 <local:BorderedEntry Grid.Column="1" Grid.Row="14" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
                        ClearButtonVisibility="WhileEditing"
+                       HorizontalTextAlignment="Center"
+                       Placeholder="Enter Accent Color 2"
                        Text="{Binding FabricItem.AccentColor3}" />
 
                 <!--Row 16 Source Information Heading-->
@@ -434,7 +453,8 @@
                        TextColor="White"
                        FontAttributes="Bold"
                        Margin="0,0,0,0"
-                       Text="Source Information" />
+                       Text="Source Information"
+                       FontSize="Large" />
 
                 <!--Row 17 Source Name-->
                 <Label Grid.Column="0" Grid.Row="16"
@@ -443,10 +463,12 @@
                        HorizontalTextAlignment="End"
                        FontSize="Small"
                        Text="Source Name" />
-
+                
                 <local:BorderedEntry Grid.Column="1" Grid.Row="16" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
                        ClearButtonVisibility="WhileEditing"
+                       HorizontalTextAlignment="Center"
+                       Placeholder="Enter Source Name"
                        Text="{Binding FabricItem.SourceName}" />
 
                 <!--Row 18 Source Url-->
@@ -460,6 +482,8 @@
                 <local:BorderedEntry Grid.Column="1" Grid.Row="17" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
                        ClearButtonVisibility="WhileEditing"
+                       HorizontalTextAlignment="Center"
+                       Placeholder="Enter Source Link"
                        Text="{Binding FabricItem.SourceUrl}" />
 
                 <!--Row 19 Purchase Date-->
@@ -501,6 +525,8 @@
                 <local:BorderedEntry Grid.Column="1" Grid.Row="20" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
                        ClearButtonVisibility="WhileEditing"
+                       HorizontalTextAlignment="Center"
+                       Placeholder="Enter Brand Name"
                        Text="{Binding FabricItem.Brand}"/>
 
                 <!--Row 22 Designer-->
@@ -514,6 +540,8 @@
                 <local:BorderedEntry Grid.Column="1" Grid.Row="21" Grid.ColumnSpan="2"
                        Margin="0,0,10,0"
                        ClearButtonVisibility="WhileEditing"
+                       HorizontalTextAlignment="Center"
+                       Placeholder="Enter Designer Name"
                        Text="{Binding FabricItem.Designer}" />
 
                 <!--Row 23 Is Discontinued-->
@@ -536,6 +564,7 @@
                        TextColor="White"
                        FontAttributes="Bold"
                        Margin="0,0,0,0"
+                       FontSize="Large"
                        Text="Misc." />
 
                 <!--Row 25 Notes-->
@@ -553,7 +582,8 @@
 
                     <Editor Grid.Column="1" Grid.Row="24" Grid.ColumnSpan="2"
                             BackgroundColor="White"
-                            HeightRequest="75"
+                            HeightRequest="98"
+                            Placeholder="Misc., Project Planning, etc..."
                             Text="{Binding FabricItem.Notes}" />
 
                 </StackLayout>
@@ -567,6 +597,7 @@
                         FontSize="Large"
                         Command="{Binding Save}"
                         CornerRadius="0" />
+
             </Grid>
         </StackLayout>
     </ScrollView>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -24,7 +25,7 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public byte[] ImageBytes { get; set; }
 
-        public decimal TotalYards { get; set; }//=> FabricItem.TotalInches != null ? (decimal)FabricItem.TotalInches / 36 : 0;
+        public decimal TotalYards { get; set; }
 
         public ObservableCollection<MainCategory> MainCategoriesList { get; set; }
 
@@ -56,7 +57,7 @@ namespace FabricTrackerMobileApp.ViewModels
             MainCategoriesList = GetMainCategoriesList();
             FabricTypesList = repository.GetFabricTypes();
             MaterialTypesList = repository.GetMaterialTypes();
-            FabricItem = new Fabric();          
+            FabricItem = new Fabric();           
         }
 
         public MainCategory SelectedMainCategory { get; set; }
