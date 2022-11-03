@@ -9,7 +9,7 @@ namespace FabricTrackerMobileApp.Models
         public int Id { get; set; }
 
         //Auto-generated when added to db
-        public string ItemCode { get; set; } 
+        public string ItemCode { get; set; }
 
         public string Name { get; set; }
 
@@ -30,6 +30,8 @@ namespace FabricTrackerMobileApp.Models
         public string SubCategoryName { get; set; }
 
         public int? TotalInches { get; set; }
+
+        public decimal? TotalYards { get; set; }
 
         public int? FatQtrQty { get; set; }
 
