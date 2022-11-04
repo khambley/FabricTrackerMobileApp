@@ -14,6 +14,7 @@ namespace FabricTrackerMobileApp
         public MainPage(MainViewModel viewModel)
         {
             InitializeComponent();
+
             viewModel.Navigation = Navigation;
             BindingContext = viewModel;
             

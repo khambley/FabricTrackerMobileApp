@@ -2,29 +2,39 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FabricTrackerMobileApp.MainPage"
-             BackgroundColor="#2A0944">
+             BackgroundColor="#3FA796"
+             Title="Welcome to My Fabric Tracker!">
 
     <ScrollView>
-        <StackLayout VerticalOptions="StartAndExpand">
-            <Frame BackgroundColor="#2A0944" Padding="24" CornerRadius="0" Margin="0,20,0,0" HasShadow="False">
-                <Label Text="My Fabric Stash" HorizontalTextAlignment="Center" TextColor="White" FontFamily="CraftyGirls" FontSize="40" />
-                
-            </Frame>
-            <Image Source="fabricbolts.png" Margin="10" />
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <!--<Frame BackgroundColor="#3FA796" Padding="14" CornerRadius="0" Margin="0,20,0,0" HasShadow="False">
+                <Label HorizontalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Welcome to" TextColor="White" FontFamily="Rochester" FontSize="34" />
+                            <Span Text="&#10;" />
+                            <Span Text="My Fabric Tracker App!" TextColor="White" FontFamily="Rochester" FontSize="34" />
+                        </FormattedString>
+
+                    </Label.FormattedText>
+
+                </Label>
+            </Frame>-->
+            <!--<Image Source="fabricbolts.png" Margin="5" />-->
 
             <Button x:Name="AddCategoryButton"
-                    Text="View MainCategories List"
+                    Text="View Categories List"
                     HorizontalOptions="FillAndExpand" 
                     BackgroundColor="#FEC260"
                     TextColor="White"
                     FontAttributes="Bold"
-                    Command="{Binding NavigateToMainCategoriesPage}"
+                    Command="{Binding NavigateToMainCategoriesPage}" 
                     Margin="30,5,30,0" />
 
             <Button x:Name="ViewFabricsButton"
                     Text="View Fabrics List"
                     HorizontalOptions="FillAndExpand" 
-                    BackgroundColor="#3FA796"
+                    BackgroundColor="#2A0944"
                     TextColor="White"
                     FontAttributes="Bold"
                     Command="{Binding NavigateToFabricsPage}"

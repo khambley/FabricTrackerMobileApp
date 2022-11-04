@@ -12,8 +12,9 @@ namespace FabricTrackerMobileApp
 
             MainPage = new NavigationPage(Resolver.Resolve<MainPage>())
             {
-                BarBackgroundColor = Color.FromHex("#2A0944"),
-                BarTextColor = Color.White
+                BarBackgroundColor = Color.FromHex("#3FA796"),
+                BarTextColor = Color.White,
+                Title = "My Fabric Tracker"
             };
            
         }
