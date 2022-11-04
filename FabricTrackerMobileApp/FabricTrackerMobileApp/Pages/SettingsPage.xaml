@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FabricTrackerMobileApp.Pages.SettingsPage"
+    Title="Settings">
+
+    <ScrollView>
+            <TableView Intent="Settings">
+                <TableRoot>
+                    <TableSection Title="General">
+                    <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="15">
+                                <Button Text="Data Backup / Restore" Command="{Binding NavigateToDataBackupRestorePage}" />
+                                <Label Text=">" TextColor="DodgerBlue" HorizontalOptions="EndAndExpand" Padding="15" />
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+        </ScrollView>
+</ContentPage>
+
