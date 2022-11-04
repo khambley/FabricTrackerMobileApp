@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -24,7 +25,7 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public byte[] ImageBytes { get; set; }
 
-        public decimal TotalYards { get; set; }//=> FabricItem.TotalInches != null ? (decimal)FabricItem.TotalInches / 36 : 0;
+        public decimal TotalYards { get; set; }
 
         public ObservableCollection<MainCategory> MainCategoriesList { get; set; }
 
@@ -56,12 +57,14 @@ namespace FabricTrackerMobileApp.ViewModels
             MainCategoriesList = GetMainCategoriesList();
             FabricTypesList = repository.GetFabricTypes();
             MaterialTypesList = repository.GetMaterialTypes();
-            FabricItem = new Fabric();          
+            FabricItem = new Fabric();   
         }
 
         public MainCategory SelectedMainCategory { get; set; }
 
         public SubCategory SelectedSubCategory { get; set; }
+
+        public int AddQty { get; set; }
 
         #region Commands
 
@@ -80,13 +83,27 @@ namespace FabricTrackerMobileApp.ViewModels
                 FabricItem.SubCategoryId = 1;
             }
 
+            FabricItem.TotalYards = (decimal)FabricItem.TotalInches / (decimal)36;
+
             await repository.AddOrUpdate(FabricItem);
             await Navigation.PopAsync();
         });
 
         public ICommand CalculateTotalYardsCommand => new Command(() =>
         {
-            TotalYards = FabricItem.TotalInches != null ? (decimal)FabricItem.TotalInches / (decimal)36.00 : 0;
+            var totalInches = FabricItem.TotalInches + AddQty;
+            if (totalInches < 0)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.Current.MainPage.DisplayAlert("Error", "Qty total must be greater than or equal to 0", "OK");
+                });
+            }
+            else
+            {
+                FabricItem.TotalInches = totalInches;
+                TotalYards = FabricItem.TotalInches != null ? (decimal)FabricItem.TotalInches / (decimal)36.00 : 0;
+            } 
         });
 
         public ICommand CaptureImageCommand => new Command(async () =>

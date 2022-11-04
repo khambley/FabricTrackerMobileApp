@@ -199,6 +199,7 @@ namespace FabricTrackerMobileApp.Data
                     MainCategoryId = 1,
                     SubCategoryId = 1,
                     TotalInches = 36,
+                    TotalYards = (decimal)1.00,
                     FabricType = "Woven",
                     Width = 60,
                     BackgroundColor = "Blue",

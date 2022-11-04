@@ -14,7 +14,7 @@ namespace FabricTrackerMobileApp.Pages
             InitializeComponent();
             viewModel.Navigation = Navigation;
             BindingContext = viewModel;
-   
+
         }
 
         protected override void OnAppearing()
@@ -26,6 +26,8 @@ namespace FabricTrackerMobileApp.Pages
         {
             (BindingContext as FabricItemViewModel).OnMainCategoryChosen(sender, e);
         }
+
+
     }
 }
 

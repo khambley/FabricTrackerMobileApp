@@ -34,6 +34,12 @@ namespace FabricTrackerMobileApp.ViewModels
             await Navigation.PushAsync(fabricsPage);
         });
 
+        public ICommand NavigateToSettingsPage => new Command(async () =>
+        {
+            var settingsPage = Resolver.Resolve<SettingsPage>();
+            await Navigation.PushAsync(settingsPage);
+        });
+
         public ICommand BackupDataCommand => new Command(async () =>
         {
             await ZipAndExportDbAndImages(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
@@ -57,6 +63,7 @@ namespace FabricTrackerMobileApp.ViewModels
             var exportFilename = $"FabricTrackerAppDb_{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.zip";
 
             Directory.CreateDirectory(tempDirectory);
+
 
             var exportDbFilePath = Path.Combine(tempDirectory, exportFilename);
 
