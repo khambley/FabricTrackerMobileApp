@@ -25,6 +25,10 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public byte[] ImageBytes { get; set; }
 
+        public int CurrentTotalInches => FabricItem.TotalInches > 0 ? FabricItem.TotalInches : 0;
+
+        public decimal? CurrentTotalYards => FabricItem.TotalYards != null ? FabricItem.TotalYards : 0;
+
         public decimal TotalYards { get; set; }
 
         public ObservableCollection<MainCategory> MainCategoriesList { get; set; }
@@ -37,12 +41,26 @@ namespace FabricTrackerMobileApp.ViewModels
 
         public bool ShowCategoryLabel
         {
-            get { return !string.IsNullOrEmpty(FabricItem.MainCategoryName); }
+            get
+            {
+                return !string.IsNullOrEmpty(FabricItem.MainCategoryName);
+            }
         }
 
         public bool ShowItemCodeLabel
         {
-            get { return !string.IsNullOrEmpty(FabricItem.ItemCode); }
+            get
+            {
+                return !string.IsNullOrEmpty(FabricItem.ItemCode);
+            }
+        }
+
+        public bool ShowNullItemCodeLabel
+        {
+            get
+            {
+                return string.IsNullOrEmpty(FabricItem.ItemCode);
+            }
         }
 
         public FabricItemViewModel(Repository repository)
@@ -102,7 +120,7 @@ namespace FabricTrackerMobileApp.ViewModels
             else
             {
                 FabricItem.TotalInches = totalInches;
-                TotalYards = FabricItem.TotalInches != null ? (decimal)FabricItem.TotalInches / (decimal)36.00 : 0;
+                TotalYards = FabricItem.TotalInches > 0 ? (decimal)FabricItem.TotalInches / (decimal)36.00 : 0;
             } 
         });
 

@@ -248,6 +248,10 @@ namespace FabricTrackerMobileApp.Data
             {
                 await _connection.InsertAsync(mainCategory);
                 OnMainCategoryItemAdded?.Invoke(this, mainCategory);
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.Current.MainPage.DisplayAlert("Saved", $"{mainCategory.MainCategoryName} was saved successfully in the database.", "OK");
+                });
             }
             else
             {
@@ -303,15 +307,38 @@ namespace FabricTrackerMobileApp.Data
         public async Task DeleteMainCategory(MainCategory mainCategory)
         {
             await CreateConnection();
-            Device.BeginInvokeOnMainThread(async () =>
+
+            var subCategories = await GetSubCategories(mainCategory.MainCategoryId);
+
+            
+
+            if (mainCategory.MainCategoryName.ToLower() == ("Uncategorized").ToLower())
             {
-                bool answer = await App.Current.MainPage.DisplayAlert("Confirm the Deletion", $"Are you sure you want to delete the category, {mainCategory.MainCategoryName}, from the database?", "OK", "Cancel");
-                if (answer)
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    await _connection.DeleteAsync(mainCategory);
-                    OnMainCategoryItemUpdated?.Invoke(this, mainCategory);
-                }
-            });
+                    App.Current.MainPage.DisplayAlert("Error", $"{mainCategory.MainCategoryName} main category cannot be deleted", "OK");
+                });  
+            }
+            // subcategories check
+            else if (subCategories.Count > 0)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.Current.MainPage.DisplayAlert("Error", $"{mainCategory.MainCategoryName} category contains subcategories. You must delete all subcategories first before you can delete the main category", "OK");
+                });
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    bool answer = await App.Current.MainPage.DisplayAlert("Confirm the Deletion", $"Are you sure you want to delete the category, {mainCategory.MainCategoryName}, from the database?", "OK", "Cancel");
+                    if (answer)
+                    {
+                        await _connection.DeleteAsync(mainCategory);
+                        OnMainCategoryItemUpdated?.Invoke(this, mainCategory);
+                    }
+                });
+            }
         }
         #endregion
 

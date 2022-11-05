@@ -3,23 +3,47 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="FabricTrackerMobileApp.Pages.MainCategoryItemView"
-    Title="Main Category">
-
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" Command="{Binding Save}" />
-    </ContentPage.ToolbarItems>
+    Title="Categories List">
 
     <StackLayout Padding="14">
-        <Label Text="Main Category Name:" />
-        <Entry Text="{Binding MainCategoryItem.MainCategoryName}"
-               Margin="0,0,0,10"
-               TextColor="DarkBlue"
-               PlaceholderColor="Red" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.8*" />
+                <ColumnDefinition Width="0.2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
 
-        <BoxView HorizontalOptions="FillAndExpand"
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Text="Main Category Name:" />
+
+            <Entry Grid.Column="0"
+                   Grid.Row="1"
+                   Text="{Binding MainCategoryItem.MainCategoryName}"
+                   Margin="0,0,0,0"
+                   TextColor="DarkBlue"
+                   VerticalTextAlignment="Center"
+                   />
+
+            <Button Grid.Column="1"
+                    Grid.Row="1"
+                    Text="Save"
+                    Padding="20,0,20,0"
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    HorizontalOptions="EndAndExpand" />
+   
+        </Grid>
+      
+        <!--<BoxView HorizontalOptions="FillAndExpand"
                  HeightRequest="1"
                  Color="#1690F4"
-                 />
+                 />-->
         <Grid Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" />

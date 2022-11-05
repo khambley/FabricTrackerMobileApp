@@ -117,6 +117,15 @@
                        IsVisible="{Binding ShowItemCodeLabel}"
                        />
 
+                <Label Grid.Column="1" Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       VerticalTextAlignment="Center"
+                       FontAttributes="Italic"
+                       TextColor="LightGray"
+                       Text="Auto-generated"
+                       IsVisible="{Binding ShowNullItemCodeLabel}"
+                       />
+
                 <!--Row 3 Current Category Label -->
                 <Label Grid.Column="0" Grid.Row="2"
                        Text="Current Category"
@@ -252,10 +261,11 @@
                            Grid.Row="0"
                            FontSize="Large"
                            VerticalTextAlignment="Center"
-                           HorizontalTextAlignment="Center">
+                           HorizontalTextAlignment="Center"
+                           >
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding FabricItem.TotalInches}" />
+                                <Span Text="{Binding CurrentTotalInches, StringFormat='{0:F0}'}" />
                                 <Span Text=" in" />
                             </FormattedString>
                         </Label.FormattedText>
@@ -273,7 +283,7 @@
                     <Label Grid.Column="3"
                            Grid.Row="0"
                            FontSize="Large"
-                           Text="{Binding FabricItem.TotalYards, StringFormat='{0:F2}'}"
+                           Text="{Binding CurrentTotalYards, StringFormat='{0:F2}'}"
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center" />
 

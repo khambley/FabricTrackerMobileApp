@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using FabricTrackerMobileApp.Pages;
 using Autofac;
+using System.Data.Common;
 
 namespace FabricTrackerMobileApp.ViewModels
 {
@@ -34,12 +35,36 @@ namespace FabricTrackerMobileApp.ViewModels
             Task.Run(async () => await LoadData());
         }
 
-        public ICommand Save => new Command(async () =>
+        public ICommand SaveCommand => new Command(async () =>
+        {
+            await Save();
+            
+        });
+
+        public ICommand AddSubCategoryItem => new Command(async () =>
+        {
+            if(MainCategoryItem.MainCategoryId <= 0)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    App.Current.MainPage.DisplayAlert("Error", "You must save the main category first before adding a subcategory.", "Go Back");
+                });
+                
+            }
+            else
+            {
+                var subCategoryItemView = Resolver.Resolve<SubCategoryItemView>("mainCategoryItem", MainCategoryItem);
+                await Navigation.PushAsync(subCategoryItemView);
+            }
+            
+        });
+
+        public async Task Save()
         {
             if (MainCategoryItem.MainCategoryName != null)
             {
                 await repository.AddOrUpdateMainCategory(MainCategoryItem);
-                await Navigation.PopAsync();
+                //await Navigation.PopAsync();
             }
             else
             {
@@ -48,15 +73,7 @@ namespace FabricTrackerMobileApp.ViewModels
                     App.Current.MainPage.DisplayAlert("Error", "A MainCategory is required. Add an entry or press the < Back button in the navbar to cancel.", "Go Back");
                 });
             }
-            
-        });
-
-        public ICommand AddSubCategoryItem => new Command(async () =>
-        {
-            var subCategoryItemView = Resolver.Resolve<SubCategoryItemView>("mainCategoryItem", MainCategoryItem );
-            await Navigation.PushAsync(subCategoryItemView);
-        });
-
+        }
         private async Task LoadData()
         {
             var subCategoryItems = await repository.GetSubCategories(MainCategoryItem.MainCategoryId);

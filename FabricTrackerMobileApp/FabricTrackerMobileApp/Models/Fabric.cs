@@ -29,7 +29,7 @@ namespace FabricTrackerMobileApp.Models
 
         public string SubCategoryName { get; set; }
 
-        public int? TotalInches { get; set; }
+        public int TotalInches { get; set; }
 
         public decimal? TotalYards { get; set; }
 
