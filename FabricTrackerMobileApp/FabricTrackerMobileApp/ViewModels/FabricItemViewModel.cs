@@ -91,6 +91,9 @@ namespace FabricTrackerMobileApp.ViewModels
             FabricItem.MainCategoryId = SelectedMainCategory != null ? SelectedMainCategory.MainCategoryId : FabricItem.MainCategoryId;
             FabricItem.SubCategoryId = SelectedSubCategory != null ? SelectedSubCategory.SubCategoryId : FabricItem.SubCategoryId;
 
+            FabricItem.MainCategoryName = repository.GetMainCategoryById(FabricItem.MainCategoryId).MainCategoryName;
+            FabricItem.SubCategoryName = repository.GetSubCategoryById(FabricItem.SubCategoryId).SubCategoryName;
+
             // Uncategorized - default maincategory / subcategory if none is chosen 
             if (FabricItem.MainCategoryId == 0)
             {

@@ -96,11 +96,11 @@ namespace FabricTrackerMobileApp.ViewModels
 
             if (!ShowAll)
             {
-                items = items.Where(x => x.MainCategoryName == SelectedMainCategory.MainCategoryName).ToList();
+                items = items.Where(x => x.MainCategoryName.ToLower() == SelectedMainCategory.MainCategoryName.ToLower()).ToList();
 
                 if(SelectedSubCategory != null)
                 {
-                    items = items.Where(x => x.MainCategoryName == SelectedMainCategory.MainCategoryName && x.SubCategoryName == SelectedSubCategory.SubCategoryName).ToList();
+                    items = items.Where(x => x.MainCategoryName.ToLower() == SelectedMainCategory.MainCategoryName.ToLower() && x.SubCategoryName.ToLower() == SelectedSubCategory.SubCategoryName.ToLower()).ToList();
                 }
                 if(items.Count == 0)
                 {
