@@ -42,7 +42,7 @@ namespace FabricTrackerMobileApp.ViewModels
         {
             //retrieve the image from ImagePath in db.
 
-            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "images/" + Item.ImagePath);
+            var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Data/images/" + Item.ImagePath);
 
             if (File.Exists(filePath))
             {

@@ -162,7 +162,12 @@ namespace FabricTrackerMobileApp.Data
                 return;
             }
 
-            var documentPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if(!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Data")))
+            {
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Data"));
+            }
+
+            var documentPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Data");
 
             var databasePath = Path.Combine(documentPath, "FabricTrackerMobileApp.db");
 
