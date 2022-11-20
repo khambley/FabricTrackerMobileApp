@@ -85,7 +85,7 @@ namespace FabricTrackerMobileApp.ViewModels
             await LoadData();
         });
 
-        private async Task LoadData()
+        public async Task LoadData()
         {
             var items = await repository.GetFabrics();
 

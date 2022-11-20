@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using FabricTrackerMobileApp.ViewModels;
 using Xamarin.Forms;
 
@@ -20,6 +21,14 @@ namespace FabricTrackerMobileApp.Pages
         {
             (BindingContext as FabricsViewModel).OnMainCategoryChosen(sender, e);
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            
+        }
+        
     }
 }
 

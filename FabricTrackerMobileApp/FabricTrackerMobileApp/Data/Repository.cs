@@ -12,6 +12,7 @@ namespace FabricTrackerMobileApp.Data
     public class Repository : IRepository
     {
         private SQLiteAsyncConnection _connection;
+        private string _databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Data");
 
         public event EventHandler<Fabric> OnItemAdded;
         public event EventHandler<Fabric> OnItemUpdated; 
@@ -162,16 +163,14 @@ namespace FabricTrackerMobileApp.Data
                 return;
             }
 
-            if(!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Data")))
+            if(!Directory.Exists(_databasePath))
             {
-                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Data"));
+                Directory.CreateDirectory(_databasePath);
             }
 
-            var documentPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Data");
+            var databaseFile = Path.Combine(_databasePath, "FabricTrackerMobileApp.db");
 
-            var databasePath = Path.Combine(documentPath, "FabricTrackerMobileApp.db");
-
-            _connection = new SQLiteAsyncConnection(databasePath);
+            _connection = new SQLiteAsyncConnection(databaseFile);
 
             await _connection.CreateTableAsync<MainCategory>();
             await _connection.CreateTableAsync<SubCategory>();
@@ -217,7 +216,38 @@ namespace FabricTrackerMobileApp.Data
             }
         }
         #endregion
-        
+
+        #region DeleteDatabase
+        public async Task DeleteDatabase()
+        {
+            if (Directory.Exists(_databasePath))
+            {
+                var databaseFile = Path.Combine(_databasePath, "FabricTrackerMobileApp.db");
+
+                if (File.Exists(databaseFile))
+                {
+                    File.Delete(databaseFile);
+                }
+
+                var imagesFilePath = Path.Combine(_databasePath, "images");
+
+                if (Directory.Exists(imagesFilePath))
+                {
+                    foreach (var file in Directory.GetFiles(imagesFilePath))
+                    {
+                        File.Delete(file);
+                    }
+
+                    Directory.Delete(imagesFilePath);
+                }
+
+                Directory.Delete(_databasePath);
+
+                await _connection.CloseAsync();
+            }
+        }
+        #endregion
+
         #region MainCategories
 
         public async Task<List<MainCategory>> GetMainCategories()

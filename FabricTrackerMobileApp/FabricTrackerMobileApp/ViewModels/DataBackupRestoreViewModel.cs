@@ -45,32 +45,12 @@ namespace FabricTrackerMobileApp.ViewModels
 
                 if (answer)
                 {
-                    if (Directory.Exists(databasePath))
-                    {
-                        if (File.Exists(Path.Combine(databasePath, "FabricTrackerMobileApp.db")))
-                        {
-                            File.Delete(Path.Combine(databasePath, "FabricTrackerMobileApp.db"));
-                        }
 
-                        var imagesFilePath = Path.Combine(databasePath, "images");
+                    await repository.DeleteDatabase();
 
-                        if (Directory.Exists(imagesFilePath))
-                        {
-                            foreach (var file in Directory.GetFiles(imagesFilePath))
-                            {
-                                File.Delete(file);
-                            }
+                    ZipFile.ExtractToDirectory(sourcePath, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
 
-                            Directory.Delete(imagesFilePath);
-                        }
-
-                        Directory.Delete(databasePath);
-
-                        ZipFile.ExtractToDirectory(sourcePath, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
-
-                        await Navigation.PopToRootAsync();
-
-                    }   
+                    await Navigation.PopToRootAsync();
                 } 
             }            
         }
