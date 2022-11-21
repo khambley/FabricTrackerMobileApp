@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using System.Linq;
 using System.Collections.ObjectModel;
 using FabricTrackerMobileApp.Models;
+using System.Collections.Generic;
 
 namespace FabricTrackerMobileApp.ViewModels
 {
@@ -42,10 +43,21 @@ namespace FabricTrackerMobileApp.ViewModels
 
             var subCategoryItems = await repository.GetSubCategories(item.MainCategoryItem.MainCategoryId);
 
-            if(subCategoryItems.Count > 0)
+            var scUpperList = new List<SubCategory>();
+
+            foreach (var subCategory in subCategoryItems)
             {
-                var subCategoryItemViewModels = subCategoryItems.Select(sc => CreateSubCategoryItemViewModel(sc));
-                vm.SubCategoryItems = new ObservableCollection<SubCategoryViewModel>(subCategoryItemViewModels);
+                var name = subCategory.SubCategoryName.ToCharArray();
+
+                subCategory.SubCategoryName = CapitalizeFirstLetter(name);
+
+                scUpperList.Add(subCategory);
+            }
+
+            if (subCategoryItems.Count > 0)
+            {
+                var subCategoryItemViewModels = scUpperList.Select(sc => CreateSubCategoryItemViewModel(sc));
+                vm.SubCategoryItems = new ObservableCollection<SubCategoryViewModel>(subCategoryItemViewModels.OrderBy(sc => sc.SubCategoryItem.SubCategoryName));
             }
 
             await Navigation.PushAsync(mainCategoryItemView);
@@ -80,8 +92,21 @@ namespace FabricTrackerMobileApp.ViewModels
         private async Task LoadData()
         { 
             var mainCategories = await repository.GetMainCategories();
-            var mainCategoriesViewModels = mainCategories.Select(mc => CreateMainCategoryItemViewModel(mc));
-            MainCategoryItems = new ObservableCollection<MainCategoryViewModel>(mainCategoriesViewModels);
+
+            var mcUpperList = new List<MainCategory>();
+
+            foreach (var mainCategory in mainCategories)
+            {
+                var name = mainCategory.MainCategoryName.ToCharArray();
+
+                mainCategory.MainCategoryName = CapitalizeFirstLetter(name);
+
+                mcUpperList.Add(mainCategory);
+            }
+
+            var mainCategoriesViewModels = mcUpperList.Select(mc => CreateMainCategoryItemViewModel(mc));
+
+            MainCategoryItems = new ObservableCollection<MainCategoryViewModel>(mainCategoriesViewModels.OrderBy(x => x.MainCategoryItem.MainCategoryName));
 
             
         }

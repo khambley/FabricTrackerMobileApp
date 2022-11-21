@@ -402,26 +402,34 @@ namespace FabricTrackerMobileApp.Data
 
             //check if subCategory already exists
             bool exists = false;
-            foreach (var item in subCategoriesList)
+            if(subCategoriesList.Count > 0)
             {
-                if (item.SubCategoryName.ToLower() == subCategory.SubCategoryName.ToLower())
+                foreach (var item in subCategoriesList)
                 {
-                    exists = true;
-                    break;
+                    if (item.SubCategoryName.ToLower() == subCategory.SubCategoryName.ToLower())
+                    {
+                        exists = true;
+                        break;
+                    }
                 }
-            }
-            if (!exists)
+                if (!exists)
+                {
+                    await _connection.InsertAsync(subCategory);
+                    OnSubCategoryItemAdded?.Invoke(this, subCategory);
+                }
+                else
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        App.Current.MainPage.DisplayAlert("Error", $"{subCategory.SubCategoryName} category already exists in database", "OK");
+                    });
+                }
+            } else
             {
                 await _connection.InsertAsync(subCategory);
                 OnSubCategoryItemAdded?.Invoke(this, subCategory);
             }
-            else
-            {
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    App.Current.MainPage.DisplayAlert("Error", $"{subCategory.SubCategoryName} category already exists in database", "OK");
-                });
-            }
+            
         }
         public async Task UpdateSubCategory(SubCategory subCategory)
         {

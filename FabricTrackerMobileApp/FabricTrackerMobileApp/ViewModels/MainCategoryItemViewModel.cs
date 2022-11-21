@@ -9,6 +9,7 @@ using System.Linq;
 using FabricTrackerMobileApp.Pages;
 using Autofac;
 using System.Data.Common;
+using System.Collections.Generic;
 
 namespace FabricTrackerMobileApp.ViewModels
 {
@@ -77,7 +78,20 @@ namespace FabricTrackerMobileApp.ViewModels
         private async Task LoadData()
         {
             var subCategoryItems = await repository.GetSubCategories(MainCategoryItem.MainCategoryId);
-            var subCategoryItemViewModels = subCategoryItems.Select(sc => CreateSubCategoryItemViewModel(sc));
+
+            var scUpperList = new List<SubCategory>();
+
+            foreach (var subCategory in subCategoryItems)
+            {
+                var name = subCategory.SubCategoryName.ToCharArray();
+
+                subCategory.SubCategoryName = CapitalizeFirstLetter(name);
+
+                scUpperList.Add(subCategory);
+            }
+
+            var subCategoryItemViewModels = scUpperList.Select(sc => CreateSubCategoryItemViewModel(sc));
+
             SubCategoryItems = new ObservableCollection<SubCategoryViewModel>(subCategoryItemViewModels);
         }
 

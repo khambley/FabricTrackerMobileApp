@@ -18,5 +18,11 @@ namespace FabricTrackerMobileApp.ViewModels
             }
         }
         public INavigation Navigation { get; set; }
+
+        public string CapitalizeFirstLetter(char[] word)
+        {
+            word[0] = char.ToUpper(word[0]);
+            return new string(word);
+        }
     }
 }
