@@ -6,13 +6,14 @@
     Title="Settings">
 
     <ScrollView>
-            <TableView Intent="Settings">
+            <TableView Intent="Settings" RowHeight="50">
                 <TableRoot>
                     <TableSection Title="General">
                     <ViewCell>
-                            <StackLayout Orientation="Horizontal" Padding="15">
-                                <Button Text="Data Backup / Restore" Command="{Binding NavigateToDataBackupRestorePage}" />
-                                <Label Text=">" TextColor="DodgerBlue" HorizontalOptions="EndAndExpand" Padding="15" />
+                            <StackLayout Orientation="Horizontal" Padding="15,5,15,5">
+                            <Button Text="Data Backup / Restore" Command="{Binding NavigateToDataBackupRestorePage}" Padding="5" FontSize="Medium" BackgroundColor="Transparent" TextColor="DodgerBlue" />
+                            <!--<Label Text="Data Backup / Restore" Padding="5"  />-->
+                            <Label Text=">" TextColor="DodgerBlue" HorizontalOptions="EndAndExpand" Padding="5" FontSize="Medium"/>
                             </StackLayout>
                         </ViewCell>
                     </TableSection>
