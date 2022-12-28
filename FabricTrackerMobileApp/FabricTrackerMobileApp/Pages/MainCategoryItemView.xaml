@@ -23,6 +23,7 @@
 
             <Entry Grid.Column="0"
                    Grid.Row="1"
+                   FontSize="Large"
                    Text="{Binding MainCategoryItem.MainCategoryName}"
                    Margin="0,0,0,0"
                    TextColor="DarkBlue"
@@ -32,7 +33,7 @@
             <Button Grid.Column="1"
                     Grid.Row="1"
                     Text="Save"
-                    Padding="20,0,20,0"
+                    Padding="10,0,10,0"
                     Command="{Binding SaveCommand}"
                     BackgroundColor="Green"
                     TextColor="White"
@@ -40,10 +41,10 @@
    
         </Grid>
       
-        <!--<BoxView HorizontalOptions="FillAndExpand"
+        <BoxView HorizontalOptions="FillAndExpand"
                  HeightRequest="1"
                  Color="#1690F4"
-                 />-->
+                 />
         <Grid Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" />
